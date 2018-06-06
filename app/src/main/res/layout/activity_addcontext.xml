@@ -1,0 +1,34 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <EditText
+        android:id="@+id/add_title"
+        android:hint="请输入内容标题"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/add_data"
+        android:layout_marginLeft="60dp"
+        android:hint="请输入内容"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/add_create"
+        android:layout_marginLeft="150dp"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="生成"/>
+
+
+    <EditText
+        android:id="@+id/et_name"
+        android:layout_marginLeft="60dp"
+        android:hint="请输入随机数字（1-3）"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>
