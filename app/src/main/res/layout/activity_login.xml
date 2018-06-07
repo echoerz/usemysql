@@ -14,5 +14,10 @@
     <TextView
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="eee"/>
+        android:text="fff"/>
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="aaa"/>
 </RelativeLayout>
