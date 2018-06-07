@@ -50,11 +50,10 @@ public class addcontext extends AppCompatActivity {
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            HashMap<String, String> mp =
-                                    DBUtils.adddata(title,context);
+                            DBUtils.adddata(title,context);
                             Message msg = new Message();
-                            msg.what = 0;
-                            msg.obj =  "查询失败，请检查网络是否连接成功";
+                          //  msg.what = 0;
+                         //   msg.obj =  "查询失败，请检查网络是否连接成功";
                             msg.what = 1;
                                 //非UI线程不要试着去操作界面
                             handler.sendMessage(msg);

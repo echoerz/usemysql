@@ -23,7 +23,14 @@ public class MainActivity extends AppCompatActivity {
     Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message message) {
-            ((TextView)findViewById(R.id.tv_result)).setText((String)message.obj);
+            String text=(String)message.obj;
+            String textfen[]=text.split("\n");
+            // 0:点赞数
+            // 1：主题
+            // 2：用户
+            // 3：内容
+            // 4：id号
+            ((TextView)findViewById(R.id.tv_result)).setText(textfen[3]);
             String str = "查询不存在";
             if(message.what == 1) str = "查询成功";
             Toast.makeText(MainActivity.this, str, Toast.LENGTH_SHORT).show();
@@ -50,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                             Random random = new Random();
                             TextView tv_result = findViewById(R.id.tv_result);
                             HashMap<String, String> mp =
-                                    DBUtils.getUserInfoByName(random.nextInt(10)+1);
+                                    DBUtils.getUserInfoByName(random.nextInt(15)+1);
                             Message msg = new Message();
                             if(mp == null) {
                                 msg.what = 0;
@@ -60,9 +67,7 @@ public class MainActivity extends AppCompatActivity {
                             else {
                                 String ss = new String();
                                 for (String key : mp.keySet()) {
-                                    if (key.equals("context")) {
-                                        ss =ss+key + ":" + mp.get(key) + "\n";
-                                    }
+                                        ss =ss+mp.get(key) + "\n";
                                 }
                                 msg.what = 1;
                                 msg.obj = ss;
