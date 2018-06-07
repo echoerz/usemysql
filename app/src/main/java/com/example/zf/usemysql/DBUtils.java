@@ -29,6 +29,38 @@ public class DBUtils {
         }
         return conn;
     }
+
+
+    public static HashMap<String, String> cheakuser(String name) {
+        HashMap<String, String> map = new HashMap<>();
+        Connection conn = getConnection("test");
+        try {
+            Statement st = conn.createStatement();
+            String sql = "select * from users where username = '" + name + "'";
+            ResultSet res = st.executeQuery(sql);
+            if (res == null) {
+                return null;
+            } else {
+                int cnt = res.getMetaData().getColumnCount();
+                //res.last(); int rowCnt = res.getRow(); res.first();
+                res.next();
+                for (int i = 1; i <= cnt; ++i) {
+                    String field = res.getMetaData().getColumnName(i);
+                    map.put(field, res.getString(field));
+                }
+                conn.close();
+                st.close();
+                res.close();
+                return map;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.d(TAG, " 数据操作异常");
+            return null;
+        }
+    }
+
+
     public static HashMap<String, String> getUserInfoByName(int name) {
         HashMap<String, String> map = new HashMap<>();
         Connection conn = getConnection("test");
