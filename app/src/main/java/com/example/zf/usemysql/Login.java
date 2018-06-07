@@ -104,16 +104,12 @@ public class Login extends AppCompatActivity {
         zhuce.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_zhuce = new Intent(Login.this,MainActivity.class);
+                Intent intent_zhuce = new Intent(Login.this,zhuce.class);
                 startActivity(intent_zhuce);
             }
         });
 
     }
 
-    public void cheaklogin(){
-
-
-    }
 
 }

@@ -1,0 +1,47 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FF7473">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="请输入账号"
+        android:textSize="12dp"
+        android:textColor="#F5F7FA"/>
+    <EditText
+        android:id="@+id/user_cheak"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="账号                                     "
+        android:textColor="#F5F7FA"
+        android:textColorHint="#F5F7FA" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="请输入密码"
+        android:textSize="12dp"
+        android:textColor="#F5F7FA"/>
+    <EditText
+        android:id="@+id/password_cheak"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="密码                                     "
+        android:textColor="#F5F7FA"
+        android:textColorHint="#F5F7FA" />
+    <Button
+        android:id="@+id/zhuce_but"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="         立即注册         "
+        android:background="@drawable/button"
+        android:textSize="20dp"
+        android:textColor="#593E1A" />
+    <TextView
+        android:id="@+id/cheakchong"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:textColor="#ff0000"
+        android:textColorHighlight="#FF7473"/>
+</LinearLayout>

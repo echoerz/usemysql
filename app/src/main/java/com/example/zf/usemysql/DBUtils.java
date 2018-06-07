@@ -108,4 +108,26 @@ public class DBUtils {
         }
         return null;
     }
+
+
+
+
+    public static HashMap<String, String> adduser(String title,String context) {
+        HashMap<String, String> map = new HashMap<>();
+        Connection connadd = getConnection("test");
+        try {
+            Statement st = connadd.createStatement();
+            String sql = "insert into users(username,password) " +
+                    "values( '"+title+"','"+context+"')";
+            st.executeUpdate(sql);
+            connadd.close();
+            st.close();
+            // res.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.d(TAG, " 数据操作异常");
+            return null;
+        }
+        return null;
+    }
 }

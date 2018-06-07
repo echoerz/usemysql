@@ -25,6 +25,7 @@
         </activity>
         <activity android:name=".addcontext" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".zhuce"></activity>
     </application>
 
 </manifest>
