@@ -31,4 +31,9 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:text="点击添加段子"/>
+    <Button
+        android:id="@+id/test1"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="test"/>
 </LinearLayout>
