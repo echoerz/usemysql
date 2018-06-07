@@ -11,17 +11,4 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"/>
 
-    <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="eee"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="qqq"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="test"/>
 </RelativeLayout>
