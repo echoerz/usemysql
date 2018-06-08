@@ -204,7 +204,7 @@ public class logintest extends AppCompatActivity implements View.OnClickListener
                         startActivity(new Intent(getApplicationContext(),MainActivity.class));
                         return false;
                     }
-                }).sendEmptyMessageDelayed(0, 900); //表示延时三秒进行任务的执行
+                }).sendEmptyMessageDelayed(0, 850); //表示延时三秒进行任务的执行
             }
             return false;
         }

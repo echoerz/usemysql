@@ -17,14 +17,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".logintest">
+
+        </activity>
+        <activity android:name=".addcontext" />
+        <activity android:name=".MainActivity"
+            android:label="精选笔记">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".addcontext" />
-        <activity android:name=".MainActivity" />
         <activity android:name=".zhuce"></activity>
     </application>
 

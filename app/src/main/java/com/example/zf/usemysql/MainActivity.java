@@ -1,6 +1,7 @@
 package com.example.zf.usemysql;
 
 import android.content.Intent;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,18 +9,27 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.ToolbarWidgetWrapper;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import java.util.HashMap;
 import java.util.Random;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements android.view.GestureDetector.OnGestureListener{
+
+    // 定义手势检测器实例
+    GestureDetector detector;
+
 
     private static final String TAG = "MainActivity";
     Handler handler = new Handler(new Handler.Callback() {
@@ -40,15 +50,18 @@ public class MainActivity extends AppCompatActivity {
         }
     });
 
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.toolbar,menu);
+        return true;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //隐藏标题栏
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.hide();
-        }
+
+        detector = new GestureDetector(this, this);//构建手势滑动对象
+
         final EditText et_name = (EditText) findViewById(R.id.et_name);
         (findViewById(R.id.btn_01)).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) { // 按下的如果是BACK，同时没有重复
@@ -105,5 +119,69 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
+
+
+    // 将该activity上的触碰事件交给GestureDetector处理
+    public boolean onTouchEvent(MotionEvent me) {
+        return detector.onTouchEvent(me);
+    }
+
+    @Override
+    public boolean onDown(MotionEvent arg0) {
+        return false;
+    }
+
+    /**
+     * 滑屏监测
+     *
+     */
+    @Override
+    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
+                           float velocityY) {
+        float minMove = 120; // 最小滑动距离
+        float minVelocity = 0; // 最小滑动速度
+        float beginX = e1.getX();
+        float endX = e2.getX();
+        float beginY = e1.getY();
+        float endY = e2.getY();
+
+        if (beginX - endX > minMove && Math.abs(velocityX) > minVelocity) { // 左滑
+            Toast.makeText(this, velocityX + "左滑", Toast.LENGTH_SHORT).show();
+        } else if (endX - beginX > minMove && Math.abs(velocityX) > minVelocity) { // 右滑
+            Toast.makeText(this, velocityX + "右滑", Toast.LENGTH_SHORT).show();
+        } else if (beginY - endY > minMove && Math.abs(velocityY) > minVelocity) { // 上滑
+            Toast.makeText(this, velocityX + "上滑", Toast.LENGTH_SHORT).show();
+        } else if (endY - beginY > minMove && Math.abs(velocityY) > minVelocity) { // 下滑
+            Toast.makeText(this, velocityX + "下滑", Toast.LENGTH_SHORT).show();
+        }
+
+        return false;
+    }
+
+    @Override
+    public void onShowPress(MotionEvent arg0) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public boolean onSingleTapUp(MotionEvent arg0) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public void onLongPress(MotionEvent arg0) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public boolean onScroll(MotionEvent e1, MotionEvent e2, float velocityX,
+                            float velocityY) {
+
+        return false;
+    }
+
 
 }

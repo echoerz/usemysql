@@ -1,0 +1,21 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    android:padding="10dp"
+    android:background="#7adfb8">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/use_touxiang"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@mipmap/touxiang"
+        android:layout_centerInParent="true"/>
+    <TextView
+        android:id="@+id/touxiang_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="梓杰"
+        android:textSize="14sp"/>
+
+</RelativeLayout>
