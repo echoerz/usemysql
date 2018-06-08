@@ -24,7 +24,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".addcontext" />
-        <activity android:name=".Login"/>
         <activity android:name=".MainActivity" />
         <activity android:name=".zhuce"></activity>
     </application>

@@ -2,9 +2,10 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FF7473">
+    android:background="#7adfb8">
 
     <TextView
+        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="请输入账号"
@@ -16,7 +17,7 @@
         android:layout_height="wrap_content"
         android:hint="账号                                     "
         android:textColor="#F5F7FA"
-        android:textColorHint="#F5F7FA" />
+        android:textColorHint="#d5d7dA" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,19 +30,20 @@
         android:layout_height="wrap_content"
         android:hint="密码                                     "
         android:textColor="#F5F7FA"
-        android:textColorHint="#F5F7FA" />
+        android:textColorHint="#d5d7dA" />
     <Button
         android:id="@+id/zhuce_but"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="         立即注册         "
         android:background="@drawable/button"
         android:textSize="20dp"
-        android:textColor="#593E1A" />
+        android:textColor="#ffffff" />
     <TextView
         android:id="@+id/cheakchong"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:textColor="#ff0000"
-        android:textColorHighlight="#FF7473"/>
+        android:textColorHighlight="#7adfb8"/>
+
 </LinearLayout>

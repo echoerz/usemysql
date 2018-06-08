@@ -62,8 +62,10 @@ public class zhuce extends AppCompatActivity {
                 final String passwords_cheak = password_cheak.getText().toString().trim();
                 Log.e(TAG,users_cheak);
                 Log.e(TAG,passwords_cheak);
-                if(users_cheak == null || users_cheak.equals("") || passwords_cheak == null || passwords_cheak.equals("")) {
-                    Toast.makeText(zhuce.this,"输入不能为空",Toast.LENGTH_SHORT).show();
+                if(     users_cheak == null || users_cheak.equals("") ||
+                        passwords_cheak == null || passwords_cheak.equals("")
+                        ) {
+                    Toast.makeText(zhuce.this,"请按要求填写所有信息",Toast.LENGTH_SHORT).show();
                 }
                 else {
                     new Thread(new Runnable() {
