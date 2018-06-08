@@ -21,16 +21,14 @@
         <activity
             android:name=".MainActivity"
             android:label="精选笔记">
-        </activity>
-        <activity android:name=".zhuce" />
-        <activity android:name=".MDmain"
-            android:label="精选笔记">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
+        <activity android:name=".zhuce" />
     </application>
 
 </manifest>
