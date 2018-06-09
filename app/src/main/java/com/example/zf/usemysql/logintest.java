@@ -101,7 +101,7 @@ public class logintest extends AppCompatActivity implements View.OnClickListener
                             editor = pref.edit();
                             editor.putString("user",user);
                             editor.putString("password",password);
-                            editor.apply();;
+                            editor.apply();
                             // 隐藏输入框
                         }
                         else {msg.what=2;}
@@ -192,6 +192,9 @@ public class logintest extends AppCompatActivity implements View.OnClickListener
             if(message.what == 2)
             {
                 str = "登录密码错误，请重试";
+            }
+            if(message.what != 1)
+            {
                 Toast.makeText(logintest.this, str, Toast.LENGTH_SHORT).show();
             }
             if(message.what == 1)

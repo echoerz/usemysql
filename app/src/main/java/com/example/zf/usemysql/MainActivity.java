@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity /*implements android.view.Ge
         //touxiang_name.setText(user);
         Toast.makeText(this,"欢迎回来，"+user,Toast.LENGTH_SHORT).show();
 
-        final EditText et_name = (EditText) findViewById(R.id.et_name);
+       // final EditText et_name = (EditText) findViewById(R.id.et_name);
         (findViewById(R.id.btn_01)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

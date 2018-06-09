@@ -1,8 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#7adfb8">
+
 <!--
     <TextView
         android:layout_marginTop="20dp"
@@ -40,17 +36,15 @@
         android:background="@drawable/button"
         android:textSize="20dp"
         android:textColor="#ffffff" />-->
-    <TextView
-        android:id="@+id/cheakchong"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:textColor="#ff0000"
-        android:textColorHighlight="#7adfb8"/>
 
-    <RelativeLayout
+
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:background="#7adfb8">
 
         <include
             android:id="@+id/zc_input_layout"
@@ -80,6 +74,11 @@
             android:text="立即注册"
             android:textColor="#ffffff"
             android:textSize="20sp" />
-    </RelativeLayout>
-
-</LinearLayout>
+        <TextView
+            android:id="@+id/cheakchong"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textColor="#ff0000"
+            android:textColorHighlight="#7adfb8"
+            android:layout_above="@+id/zhuce_btn"/>
+</RelativeLayout>

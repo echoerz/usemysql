@@ -35,11 +35,11 @@ public class zhuce extends AppCompatActivity {
             // 1：密码
             // ((TextView)findViewById(R.id.tv_result)).setText(textfen[3]);
             String str = "该昵称已被注册";
+            cheakchong.setText(str);
             if(message.what == 1)
             {
-                str = "注册成功";
-                Toast.makeText(zhuce.this, str, Toast.LENGTH_SHORT).show();
-                cheakchong.setText(str);
+                //str = "注册成功";
+                //Toast.makeText(zhuce.this, str, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(zhuce.this,MainActivity.class);
                 startActivity(intent);
             }
