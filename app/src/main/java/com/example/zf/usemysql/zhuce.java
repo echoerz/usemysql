@@ -23,6 +23,10 @@ public class zhuce extends AppCompatActivity {
 
     private EditText PasswordCheak;
 
+    private EditText PasswordCheakTwice;
+
+    private TextView ZC_Button;
+
     private static final String TAG = "zhuce";
     Handler handler_login = new Handler(new Handler.Callback() {
         @Override
@@ -35,10 +39,7 @@ public class zhuce extends AppCompatActivity {
             {
                 str = "注册成功";
                 Toast.makeText(zhuce.this, str, Toast.LENGTH_SHORT).show();
-            }
-            cheakchong.setText(str);
-            if(message.what == 1)
-            {
+                cheakchong.setText(str);
                 Intent intent = new Intent(zhuce.this,MainActivity.class);
                 startActivity(intent);
             }
@@ -55,35 +56,43 @@ public class zhuce extends AppCompatActivity {
         {
             actionBar.hide();
         }
-        UserCheak = (EditText)findViewById(R.id.user_cheak);
-        PasswordCheak = (EditText)findViewById(R.id.password_cheak);
-        Button zhuce_but = (Button)findViewById(R.id.zhuce_but);
+        UserCheak = (EditText)findViewById(R.id.zc_user_t);
+        PasswordCheak = (EditText)findViewById(R.id.zc_password_t);
+        PasswordCheakTwice = (EditText)findViewById(R.id.zc_password_t_2);
+        ZC_Button = (TextView) findViewById(R.id.zhuce_btn);
         cheakchong = (TextView)findViewById(R.id.cheakchong);
 
-        zhuce_but.setOnClickListener(new View.OnClickListener() {
+        ZC_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                final String users_cheak = UserCheak.getText().toString().trim();
-                final String passwords_cheak = PasswordCheak.getText().toString().trim();
-                Log.e(TAG,users_cheak);
-                Log.e(TAG,passwords_cheak);
-                if(     users_cheak == null || users_cheak.equals("") ||
-                        passwords_cheak == null || passwords_cheak.equals("")
+                final String user_cheak = UserCheak.getText().toString().trim();
+                final String password_cheak = PasswordCheak.getText().toString().trim();
+                final String password_cheak_twice = PasswordCheakTwice.getText().toString().trim();
+                Log.e(TAG,user_cheak);
+                Log.e(TAG,password_cheak);
+                if(     user_cheak == null || user_cheak.equals("") ||
+                        password_cheak == null || password_cheak.equals("")
                         ) {
                     Toast.makeText(zhuce.this,"请按要求填写所有信息",Toast.LENGTH_SHORT).show();
+                }
+                else if(password_cheak_twice == null || password_cheak_twice.equals("")){
+                    Toast.makeText(zhuce.this,"请再次输入密码",Toast.LENGTH_SHORT).show();
+                }
+                else if(!(password_cheak_twice.equals(password_cheak))){
+                    Toast.makeText(zhuce.this,"两次密码输入不一致",Toast.LENGTH_SHORT).show();
                 }
                 else {
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
                             HashMap<String, String> mp =
-                                    DBUtils.CheakUser(users_cheak);
+                                    DBUtils.CheakUser(user_cheak);
                             Message msg = new Message();
                             if(mp == null) {
                                 msg.what = 1;
                                 HashMap<String, String> mp1 =
-                                        DBUtils.adduser(users_cheak,passwords_cheak);
+                                        DBUtils.adduser(user_cheak,password_cheak);
                                 //非UI线程不要试着去操作界面
                             }
                             else {

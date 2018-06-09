@@ -232,6 +232,8 @@ public class logintest extends AppCompatActivity implements View.OnClickListener
         }
         initView();
 
+
+
         TextView zhuce = (TextView)findViewById(R.id.zhuce_t);
         zhuce.setOnClickListener(new View.OnClickListener() {
             @Override
