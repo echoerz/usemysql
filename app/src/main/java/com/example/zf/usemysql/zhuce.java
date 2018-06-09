@@ -16,7 +16,13 @@ import android.widget.Toast;
 import java.util.HashMap;
 
 public class zhuce extends AppCompatActivity {
+
     public TextView cheakchong;
+
+    private EditText UserCheak;
+
+    private EditText PasswordCheak;
+
     private static final String TAG = "zhuce";
     Handler handler_login = new Handler(new Handler.Callback() {
         @Override
@@ -49,8 +55,8 @@ public class zhuce extends AppCompatActivity {
         {
             actionBar.hide();
         }
-        final EditText user_cheak = (EditText)findViewById(R.id.user_cheak);
-        final EditText password_cheak = (EditText)findViewById(R.id.password_cheak);
+        UserCheak = (EditText)findViewById(R.id.user_cheak);
+        PasswordCheak = (EditText)findViewById(R.id.password_cheak);
         Button zhuce_but = (Button)findViewById(R.id.zhuce_but);
         cheakchong = (TextView)findViewById(R.id.cheakchong);
 
@@ -58,8 +64,8 @@ public class zhuce extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                final String users_cheak = user_cheak.getText().toString().trim();
-                final String passwords_cheak = password_cheak.getText().toString().trim();
+                final String users_cheak = UserCheak.getText().toString().trim();
+                final String passwords_cheak = PasswordCheak.getText().toString().trim();
                 Log.e(TAG,users_cheak);
                 Log.e(TAG,passwords_cheak);
                 if(     users_cheak == null || users_cheak.equals("") ||
