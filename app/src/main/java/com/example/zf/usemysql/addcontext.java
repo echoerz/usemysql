@@ -59,6 +59,8 @@ public class addcontext extends AppCompatActivity {
                             handler.sendMessage(msg);
                         }
                     }).start();
+                    add_title.setText("");
+                    add_context.setText("");
                 }
             }
         });

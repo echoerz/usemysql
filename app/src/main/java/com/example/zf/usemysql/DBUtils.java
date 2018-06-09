@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
+import java.util.Random;
+
 /**
  * Created by zf on 2018/6/5.
  */
@@ -60,23 +62,54 @@ public class DBUtils {
         }
     }
 
-
-    public static HashMap<String, String> getUserInfoByName(int name) {
-        HashMap<String, String> map = new HashMap<>();
+    public static int findhangshu() {
         Connection conn = getConnection("test");
         try {
-            Statement st = conn.createStatement();
-            String sql = "select * from framgment where id = '" + name + "'";
+            Statement st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            String sql = "select id from framgment";
+            ResultSet res = st.executeQuery(sql);
+            if (res == null) {
+                return -1;
+            } else {
+                res.last();
+                int count = res.getRow();
+                res.beforeFirst();
+                res.next();
+                conn.close();
+                st.close();
+                res.close();
+                return (count-1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.d(TAG, " 数据操作异常");
+            return -1;
+        }
+    }
+
+    public static HashMap<String, String> getUserInfoByName() {
+        HashMap<String, String> map = new HashMap<>();
+        int a= findhangshu();
+        Random random = new Random();
+        int name=random.nextInt(a) + 1;
+        Connection conn = getConnection("test");
+        try {
+            Statement st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            String sql = "select * from framgment limit  " + name + ",1";
             ResultSet res = st.executeQuery(sql);
             if (res == null) {
                 return null;
             } else {
                 int cnt = res.getMetaData().getColumnCount();
+                res.last();
+                int count = res.getRow();
+                res.beforeFirst();
                 //res.last(); int rowCnt = res.getRow(); res.first();
                 res.next();
                 for (int i = 1; i <= cnt; ++i) {
-                    String field = res.getMetaData().getColumnName(i);
+                    String field = res.getMetaData().getColumnLabel(i);
                     map.put(field, res.getString(field));
+                    //Log.d("DBUtils","aaaa:"+res.getString(field));
                 }
                 conn.close();
                 st.close();

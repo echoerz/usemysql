@@ -29,7 +29,7 @@ import android.widget.Toolbar;
 import java.util.HashMap;
 import java.util.Random;
 
-public class MainActivity extends AppCompatActivity implements android.view.GestureDetector.OnGestureListener{
+public class MainActivity extends AppCompatActivity /*implements android.view.GestureDetector.OnGestureListener*/{
 
     // 定义手势检测器实例
     GestureDetector detector;
@@ -46,10 +46,12 @@ public class MainActivity extends AppCompatActivity implements android.view.Gest
             // 2：用户
             // 3：内容
             // 4：id号
-            ((TextView) findViewById(R.id.tv_result)).setText(textfen[3]);
+            ((TextView) findViewById(R.id.tv_result)).setText(text);
             String str = "查询不存在";
-            if (message.what == 1) str = "查询成功";
-            Toast.makeText(MainActivity.this, str, Toast.LENGTH_SHORT).show();
+            if (message.what == 1){
+                str = "查询成功";
+            }
+            if (message.what != 1){Toast.makeText(MainActivity.this, str, Toast.LENGTH_SHORT).show();}
             return false;
         }
     });
@@ -59,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements android.view.Gest
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        detector = new GestureDetector(this, this);//构建手势滑动对象
+      //  detector = new GestureDetector(this, this);//构建手势滑动对象
 
         final EditText et_name = (EditText) findViewById(R.id.et_name);
         (findViewById(R.id.btn_01)).setOnClickListener(new View.OnClickListener() {
@@ -74,10 +76,10 @@ public class MainActivity extends AppCompatActivity implements android.view.Gest
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        Random random = new Random();
                         TextView tv_result = findViewById(R.id.tv_result);
                         HashMap<String, String> mp =
-                                DBUtils.getUserInfoByName(random.nextInt(15) + 1);
+                                DBUtils.getUserInfoByName();
+
                         Message msg = new Message();
                         if (mp == null) {
                             msg.what = 0;
@@ -86,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements android.view.Gest
                         } else {
                             String ss = new String();
                             for (String key : mp.keySet()) {
-                                ss = ss + mp.get(key) + "\n";
+                                ss = ss +mp.get(key) + "\n";
                             }
                             msg.what = 1;
                             msg.obj = ss;
@@ -126,8 +128,6 @@ public class MainActivity extends AppCompatActivity implements android.view.Gest
 
 
     }
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar,menu);
@@ -148,6 +148,7 @@ public class MainActivity extends AppCompatActivity implements android.view.Gest
         return true;
     }
 
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) { // 按下的如果是BACK，同时没有重复
@@ -159,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements android.view.Gest
         return super.onKeyDown(keyCode, event);
     }
 
-
+/*
     // 将该activity上的触碰事件交给GestureDetector处理
     public boolean onTouchEvent(MotionEvent me) {
         return detector.onTouchEvent(me);
@@ -170,10 +171,7 @@ public class MainActivity extends AppCompatActivity implements android.view.Gest
         return false;
     }
 
-    /**
-     * 滑屏监测
-     *
-     */
+    //花瓶检测
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
                            float velocityY) {
@@ -221,6 +219,6 @@ public class MainActivity extends AppCompatActivity implements android.view.Gest
 
         return false;
     }
-
+*/
 
 }
