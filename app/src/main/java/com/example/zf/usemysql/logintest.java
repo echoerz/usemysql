@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -29,6 +30,10 @@ import android.widget.Toast;
 import java.util.HashMap;
 
 public class logintest extends AppCompatActivity implements View.OnClickListener{
+
+    private SharedPreferences pref;
+
+    private SharedPreferences.Editor editor;
 
     private TextView mBtnLogin;
 
@@ -40,36 +45,37 @@ public class logintest extends AppCompatActivity implements View.OnClickListener
 
     private LinearLayout mName, mPsw;
 
+    private EditText User;
+
+    private EditText Password;
 
     private void initView() {
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
         mBtnLogin = (TextView) findViewById(R.id.main_btn_login);
         progress = findViewById(R.id.layout_progress);
         mInputLayout = findViewById(R.id.input_layout);
         mName = (LinearLayout) findViewById(R.id.input_layout_name);
         mPsw = (LinearLayout) findViewById(R.id.input_layout_psw);
 
+        User = (EditText)findViewById(R.id.user_t);
+        Password = (EditText)findViewById(R.id.password_t);
+        //将账号和密码都设置到文本框中
+        String user = pref.getString("user","");
+        String password = pref.getString("password","");
+        User.setText(user);
+        Password.setText(password);
+
         mBtnLogin.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
+        final String user = User.getText().toString().trim();
+        final String password = Password.getText().toString().trim();
+        Log.e(TAG,user);
+        Log.e(TAG,password);
 
-
-
-
-        final EditText user = (EditText)findViewById(R.id.user_t);
-        final EditText password = (EditText)findViewById(R.id.password_t);
-
-
-        final String users = user.getText().toString().trim();
-        final String passwords = password.getText().toString().trim();
-        Log.e(TAG,users);
-        Log.e(TAG,passwords);
-
-
-
-
-        if(users == null || users.equals("") || passwords == null || passwords.equals("")) {
+        if(user == null || user.equals("") || password == null || password.equals("")) {
             Toast.makeText(logintest.this,"输入不能为空",Toast.LENGTH_SHORT).show();
         }
         else {
@@ -77,7 +83,7 @@ public class logintest extends AppCompatActivity implements View.OnClickListener
                 @Override
                 public void run() {
                     HashMap<String, String> mp =
-                            DBUtils.cheakuser(users);
+                            DBUtils.CheakUser(user);
                     Message msg = new Message();
                     if(mp == null) {
                         msg.what = 0;
@@ -90,8 +96,12 @@ public class logintest extends AppCompatActivity implements View.OnClickListener
                         }
                         String text=(String)ss;
                         String textfen[]=text.split("\n");
-                        if (textfen[1].equals(passwords)) {
+                        if (textfen[1].equals(password)) {
                             msg.what = 1;
+                            editor = pref.edit();
+                            editor.putString("user",user);
+                            editor.putString("password",password);
+                            editor.apply();;
                             // 隐藏输入框
                         }
                         else {msg.what=2;}

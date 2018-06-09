@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity /*implements android.view.Ge
                     public void run() {
                         TextView tv_result = findViewById(R.id.tv_result);
                         HashMap<String, String> mp =
+                                DBUtils.ChackID();
                                 DBUtils.getUserInfoByName();
 
                         Message msg = new Message();
