@@ -22,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:text="请输入用户名"
                 android:textSize="18dp"
-                android:textColor="#000"/>
+                android:textColor="#4d000000"/>
         </LinearLayout>
         <View
             android:layout_width="match_parent"
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:text="请输入密码"
                 android:textSize="18dp"
-                android:textColor="#000"/>
+                android:textColor="#4d000000"/>
         </LinearLayout>
         <View
             android:layout_width="match_parent"
@@ -92,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:text="请再次输入密码"
                 android:textSize="18dp"
-                android:textColor="#000"/>
+                android:textColor="#4d000000"/>
         </LinearLayout>
         <View
             android:layout_width="match_parent"
