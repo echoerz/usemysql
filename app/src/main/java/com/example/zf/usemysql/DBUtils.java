@@ -87,7 +87,7 @@ public class DBUtils {
         }
     }
 
-    public static HashMap<String, String> ChackID(int id) {
+    public static HashMap<String, String> ChackID() {
         HashMap<String, String> map = new HashMap<>();
         int a= findhangshu();
         Random random = new Random();
