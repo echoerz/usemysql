@@ -34,7 +34,7 @@ public class zhuce extends AppCompatActivity {
             // 0:用户
             // 1：密码
             // ((TextView)findViewById(R.id.tv_result)).setText(textfen[3]);
-            String str = "该昵称已被注册";
+            String str = "该昵称已被注册,请重新输入";
             cheakchong.setText(str);
             if(message.what == 1)
             {
@@ -42,6 +42,11 @@ public class zhuce extends AppCompatActivity {
                 //Toast.makeText(zhuce.this, str, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(zhuce.this,MainActivity.class);
                 startActivity(intent);
+            }
+            if (message.what==0){
+                UserCheak.setText("");
+                PasswordCheak.setText("");
+                PasswordCheakTwice.setText("");
             }
             return false;
         }
@@ -74,13 +79,16 @@ public class zhuce extends AppCompatActivity {
                 if(     user_cheak == null || user_cheak.equals("") ||
                         password_cheak == null || password_cheak.equals("")
                         ) {
-                    Toast.makeText(zhuce.this,"请按要求填写所有信息",Toast.LENGTH_SHORT).show();
+                    cheakchong.setText("请按要求填写所有信息");
+                    //Toast.makeText(zhuce.this,"请按要求填写所有信息",Toast.LENGTH_SHORT).show();
                 }
                 else if(password_cheak_twice == null || password_cheak_twice.equals("")){
-                    Toast.makeText(zhuce.this,"请再次输入密码",Toast.LENGTH_SHORT).show();
+                    cheakchong.setText("请再次输入密码");
+                    //Toast.makeText(zhuce.this,"请再次输入密码",Toast.LENGTH_SHORT).show();
                 }
                 else if(!(password_cheak_twice.equals(password_cheak))){
-                    Toast.makeText(zhuce.this,"两次密码输入不一致",Toast.LENGTH_SHORT).show();
+                    cheakchong.setText("两次密码输入不一致");
+                    //Toast.makeText(zhuce.this,"两次密码输入不一致",Toast.LENGTH_SHORT).show();
                 }
                 else {
                     new Thread(new Runnable() {
