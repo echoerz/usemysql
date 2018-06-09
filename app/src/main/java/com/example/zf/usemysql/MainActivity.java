@@ -1,6 +1,8 @@
 package com.example.zf.usemysql;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -22,6 +24,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
@@ -34,6 +37,8 @@ public class MainActivity extends AppCompatActivity /*implements android.view.Ge
     // 定义手势检测器实例
     GestureDetector detector;
 
+    private TextView touxiang_name;
+    private SharedPreferences pref1;
     private DrawerLayout mDrawerLayout;
     private static final String TAG = "MainActivity";
     Handler handler = new Handler(new Handler.Callback() {
@@ -63,6 +68,12 @@ public class MainActivity extends AppCompatActivity /*implements android.view.Ge
 
       //  detector = new GestureDetector(this, this);//构建手势滑动对象
 
+        //touxiang_name = (TextView)findViewById(R.id.touxiang_name);
+        pref1 = PreferenceManager.getDefaultSharedPreferences(this);
+        String user = pref1.getString("user","");
+        //touxiang_name.setText(user);
+        Toast.makeText(this,"欢迎回来，"+user,Toast.LENGTH_SHORT).show();
+
         final EditText et_name = (EditText) findViewById(R.id.et_name);
         (findViewById(R.id.btn_01)).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +87,7 @@ public class MainActivity extends AppCompatActivity /*implements android.view.Ge
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
+
                         TextView tv_result = findViewById(R.id.tv_result);
                         HashMap<String, String> mp =
                                 DBUtils.ChackID();

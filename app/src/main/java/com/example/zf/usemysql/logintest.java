@@ -192,9 +192,8 @@ public class logintest extends AppCompatActivity implements View.OnClickListener
             if(message.what == 2)
             {
                 str = "登录密码错误，请重试";
+                Toast.makeText(logintest.this, str, Toast.LENGTH_SHORT).show();
             }
-            Toast.makeText(logintest.this, str, Toast.LENGTH_SHORT).show();
-
             if(message.what == 1)
             {
                 // 计算出控件的高与宽
