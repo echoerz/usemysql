@@ -72,7 +72,7 @@ public class zhuce extends AppCompatActivity {
                         @Override
                         public void run() {
                             HashMap<String, String> mp =
-                                    DBUtils.cheakuser(users_cheak);
+                                    DBUtils.CheakUser(users_cheak);
                             Message msg = new Message();
                             if(mp == null) {
                                 msg.what = 1;

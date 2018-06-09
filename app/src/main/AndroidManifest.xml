@@ -16,16 +16,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".logintest"></activity>
-        <activity android:name=".addcontext" />
-        <activity
-            android:name=".MainActivity"
-            android:label="精选笔记">
+        <activity android:name=".logintest">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".addcontext" />
+        <activity
+            android:name=".MainActivity"
+            android:label="精选笔记">
 
         </activity>
         <activity android:name=".zhuce" />

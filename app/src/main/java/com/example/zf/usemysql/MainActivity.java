@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements android.view.Gest
                         Random random = new Random();
                         TextView tv_result = findViewById(R.id.tv_result);
                         HashMap<String, String> mp =
-                                DBUtils.getUserInfoByName(random.nextInt(15) + 1);
+                                DBUtils.ChackID(random.nextInt(15) + 1);
                         Message msg = new Message();
                         if (mp == null) {
                             msg.what = 0;

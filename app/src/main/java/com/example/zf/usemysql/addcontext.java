@@ -50,7 +50,7 @@ public class addcontext extends AppCompatActivity {
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            DBUtils.adddata(title,context);
+                            DBUtils.AddData(title,context);
                             Message msg = new Message();
                           //  msg.what = 0;
                          //   msg.obj =  "查询失败，请检查网络是否连接成功";

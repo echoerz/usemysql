@@ -31,7 +31,7 @@ public class DBUtils {
     }
 
 
-    public static HashMap<String, String> cheakuser(String name) {
+    public static HashMap<String, String> CheakUser(String name) {
         HashMap<String, String> map = new HashMap<>();
         Connection conn = getConnection("test");
         try {
@@ -61,12 +61,12 @@ public class DBUtils {
     }
 
 
-    public static HashMap<String, String> getUserInfoByName(int name) {
+    public static HashMap<String, String> ChackID(int id) {
         HashMap<String, String> map = new HashMap<>();
         Connection conn = getConnection("test");
         try {
             Statement st = conn.createStatement();
-            String sql = "select * from framgment where id = '" + name + "'";
+            String sql = "select * from framgment where id = '" + id + "'";
             ResultSet res = st.executeQuery(sql);
             if (res == null) {
                 return null;
@@ -90,7 +90,7 @@ public class DBUtils {
         }
     }
 
-    public static HashMap<String, String> adddata(String title,String context) {
+    public static HashMap<String, String> AddData(String title,String context) {
         HashMap<String, String> map = new HashMap<>();
         Connection connadd = getConnection("test");
         try {
@@ -123,6 +123,40 @@ public class DBUtils {
             connadd.close();
             st.close();
             // res.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.d(TAG, " 数据操作异常");
+            return null;
+        }
+        return null;
+    }
+
+    public static HashMap<String, String> AddZan(String username) {
+        HashMap<String, String> map = new HashMap<>();
+        Connection conn = getConnection("test");
+        try {
+            Statement st = conn.createStatement();
+            String sql = "update fragment set zan=zan+1 where username = '" + username + "'";
+            st.executeUpdate(sql);
+            conn.close();
+            st.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.d(TAG, " 数据操作异常");
+            return null;
+        }
+        return null;
+    }
+
+    public static HashMap<String, String> CutZan(String username) {
+        HashMap<String, String> map = new HashMap<>();
+        Connection conn = getConnection("test");
+        try {
+            Statement st = conn.createStatement();
+            String sql = "update fragment set zan=zan-1 where username = '" + username + "'";
+            st.executeUpdate(sql);
+            conn.close();
+            st.close();
         } catch (Exception e) {
             e.printStackTrace();
             Log.d(TAG, " 数据操作异常");
