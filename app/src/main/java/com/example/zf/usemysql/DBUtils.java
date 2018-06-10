@@ -2,6 +2,9 @@ package com.example.zf.usemysql;
 
 import android.util.Log;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -87,6 +90,51 @@ public class DBUtils {
         }
     }
 
+    /*
+    public static byte[] getpic() {
+        Connection conn = getConnection("test");
+        try {
+            Statement st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            String sql = "select picadd from framgment";
+            ResultSet res = st.executeQuery(sql);
+            if (res == null) {
+                return null;
+            } else {
+                if(res.next()){
+                    res.first();
+                    Blob blob=res.getBlob("picadd");
+                    BufferedInputStream is = null;
+                    try {
+                        is = new BufferedInputStream(blob.getBinaryStream());
+                        byte[] bytes = new byte[(int) blob.length()];
+                        int len = bytes.length;
+                        int offset = 0;
+                        int read = 0;
+
+                        while (offset < len && (read = is.read(bytes, offset, len - offset)) >= 0) {
+                            offset += read;
+                        }
+                        return bytes;
+                    } catch (Exception e) {
+                        return null;
+                    } finally {
+                        try {
+                            is.close();
+                            is = null;
+                        } catch (IOException e) {
+                            return null;
+                        }
+                    }
+                }
+                return null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.d(TAG, " 数据操作异常");
+            return null;
+        }
+    }
+*/
     public static HashMap<String, String> ChackID() {
         HashMap<String, String> map = new HashMap<>();
         int a= findhangshu();
@@ -123,13 +171,13 @@ public class DBUtils {
         }
     }
 
-    public static HashMap<String, String> AddData(String title,String context) {
+    public static HashMap<String, String> AddData(String title,String context,String username) {
         HashMap<String, String> map = new HashMap<>();
         Connection connadd = getConnection("test");
         try {
             Statement st = connadd.createStatement();
-            String sql = "insert into framgment(username,title,context,zan) " +
-                    "values( '梓杰','"+title+"','"+context+"',0)";
+            String sql = "insert into framgment(zan,title,context,username) " +
+                    "values( 0,'"+title+"','"+context+"','"+username+"')";
             st.executeUpdate(sql);
             connadd.close();
             st.close();
