@@ -16,7 +16,6 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -27,11 +26,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.zf.usemysql.login.BaseActivity;
 import com.example.zf.usemysql.tools.DBUtils;
 
 import java.io.ByteArrayOutputStream;
 
-public class addcontext extends AppCompatActivity {
+public class addcontext extends BaseActivity {
     private ImageView picture;
     private Uri imageUri;
     public static final int CHOOSE_PHOTO = 2;

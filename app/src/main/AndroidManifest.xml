@@ -27,7 +27,7 @@
         <activity android:name=".addcontext" />
         <activity
             android:name=".MainActivity"
-            android:label="精选笔记"></activity>
+            android:label="精选笔记" />
         <activity android:name=".login.zhuce" />
 
         <provider
@@ -40,9 +40,8 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".myroom.MainZhuYe">
-
-        </activity>
+        <activity android:name=".myroom.MainZhuYe"></activity>
+        <activity android:name=".myroom.changedata"></activity>
     </application>
 
 </manifest>
