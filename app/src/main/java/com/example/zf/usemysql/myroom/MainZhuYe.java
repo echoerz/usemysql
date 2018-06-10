@@ -1,4 +1,4 @@
-package com.example.zf.usemysql;
+package com.example.zf.usemysql.myroom;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +9,9 @@ import android.os.Build;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+
+import com.example.zf.usemysql.R;
+
 public class MainZhuYe extends AppCompatActivity {
     ImageView ivBackGround;
     @Override

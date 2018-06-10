@@ -2,7 +2,6 @@ package com.example.zf.usemysql;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -13,25 +12,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.ToolbarWidgetWrapper;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
+
+import com.example.zf.usemysql.myroom.MainZhuYe;
+import com.example.zf.usemysql.tools.DBUtils;
 
 import java.util.HashMap;
-import java.util.Random;
 
 public class MainActivity extends AppCompatActivity /*implements android.view.GestureDetector.OnGestureListener*/{
 
@@ -150,6 +144,7 @@ public class MainActivity extends AppCompatActivity /*implements android.view.Ge
                         mDrawerLayout.closeDrawers();
                         break;
                     case R.id.nav_myroom:
+                        mDrawerLayout.closeDrawers();
                         Intent intent = new Intent(MainActivity.this,MainZhuYe.class);
                         startActivity(intent);
                         break;

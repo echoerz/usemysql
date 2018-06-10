@@ -1,4 +1,4 @@
-package com.example.zf.usemysql;
+package com.example.zf.usemysql.myroom;
 
 import android.widget.RelativeLayout;
 import android.content.Context;
@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+
+import com.example.zf.usemysql.R;
 
 import java.util.ArrayList;
 import java.util.List;

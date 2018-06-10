@@ -1,4 +1,4 @@
-package com.example.zf.usemysql;
+package com.example.zf.usemysql.myroom;
 
 /**
  * Created by zf on 2018/6/10.

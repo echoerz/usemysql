@@ -5,15 +5,15 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.zf.usemysql.MainZhuYe">
+    tools:context="com.example.zf.usemysql.myroom.MainZhuYe">
 
-    <com.example.zf.usemysql.AvatarLayout
+    <com.example.zf.usemysql.myroom.AvatarLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true">
 
-        <com.example.zf.usemysql.PullToRefeshLayout
+        <com.example.zf.usemysql.myroom.PullToRefeshLayout
             android:id="@+id/pulltorefeshLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -143,6 +143,6 @@
                     android:gravity="center_horizontal"
                     />
             </LinearLayout>
-        </com.example.zf.usemysql.PullToRefeshLayout>
-    </com.example.zf.usemysql.AvatarLayout>
+        </com.example.zf.usemysql.myroom.PullToRefeshLayout>
+    </com.example.zf.usemysql.myroom.AvatarLayout>
 </RelativeLayout>

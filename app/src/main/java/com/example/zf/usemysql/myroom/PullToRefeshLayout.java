@@ -1,12 +1,12 @@
-package com.example.zf.usemysql;
+package com.example.zf.usemysql.myroom;
 
 import android.widget.LinearLayout;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+
 /**
  * Created by zf on 2018/6/10.
  */
