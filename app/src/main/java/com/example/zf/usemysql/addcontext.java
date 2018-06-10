@@ -4,11 +4,13 @@ import android.Manifest;
 import android.annotation.TargetApi;
 import android.content.ContentUris;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -31,11 +33,19 @@ import android.widget.Toast;
 
 import java.util.HashMap;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
+
+import java.io.ByteArrayOutputStream;
+
 public class addcontext extends AppCompatActivity {
     private ImageView picture;
     private Uri imageUri;
     public static final int CHOOSE_PHOTO = 2;
     private static final String TAG = "addcontext";
+    public byte[] picadd;
+    private SharedPreferences pref2;
     Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message message) {
@@ -53,24 +63,10 @@ public class addcontext extends AppCompatActivity {
         setContentView(R.layout.activity_addcontext);
 
         picture =(ImageView)findViewById(R.id.picture);
-        Button chooseFromAlbum = (Button)findViewById(R.id.choose_from_album);
-        chooseFromAlbum.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ContextCompat.checkSelfPermission(addcontext.this,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager
-                        .PERMISSION_GRANTED){
-                    ActivityCompat.requestPermissions(addcontext.this,new
-                    String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
-                } else {
-                    openAlbum();
-                }
-            }
-        });
-
-
         final EditText add_title = (EditText)findViewById(R.id.add_title);
         final EditText add_context = (EditText)findViewById(R.id.add_data);
+        pref2 = PreferenceManager.getDefaultSharedPreferences(this);
+        final String user = pref2.getString("user","");
         Button add_create = (Button)findViewById(R.id.add_create);
         add_create.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +82,7 @@ public class addcontext extends AppCompatActivity {
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            DBUtils.AddData(title,context);
+                            DBUtils.AddData(title,context,user);
                             Message msg = new Message();
                           //  msg.what = 0;
                          //   msg.obj =  "查询失败，请检查网络是否连接成功";
@@ -97,6 +93,21 @@ public class addcontext extends AppCompatActivity {
                     }).start();
                     add_title.setText("");
                     add_context.setText("");
+                }
+            }
+        });
+
+        Button chooseFromAlbum = (Button)findViewById(R.id.choose_from_album);
+        chooseFromAlbum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ContextCompat.checkSelfPermission(addcontext.this,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager
+                        .PERMISSION_GRANTED){
+                    ActivityCompat.requestPermissions(addcontext.this,new
+                            String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+                } else {
+                    openAlbum();
                 }
             }
         });
@@ -170,8 +181,11 @@ public class addcontext extends AppCompatActivity {
 
     private void displayImage(String imagePath) {
         if (imagePath!=null){
-            Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
-            picture.setImageBitmap(bitmap);
+            Bitmap mypic = BitmapFactory.decodeFile(imagePath);
+            picadd = convertIconToString(mypic);
+            //  org.hibernate.Hibernate.Hibernate.createBlob(new byte[1024]);
+            Bitmap a = convertStringToIcon(picadd);
+            picture.setImageBitmap(a);
         }else {
             Toast.makeText(this,"主人我无法偷到照片嘤嘤嘤",Toast.LENGTH_SHORT).show();
         }
@@ -190,5 +204,42 @@ public class addcontext extends AppCompatActivity {
             cursor.close();
         }
         return path;
+    }
+
+
+
+
+
+    //图片处理
+
+    /**
+     * 图片转成string
+     *
+     * @param bitmap
+     * @return
+     */
+    public static byte[] convertIconToString(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();// outputstream
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        byte[] bytes = baos.toByteArray();// 转为byte数组
+        return bytes;
+    }
+
+    /**
+     * string转成bitmap
+     *
+     * @param bytes
+     */
+    public static Bitmap convertStringToIcon(byte[] bytes) {
+        // OutputStream out;
+        Bitmap bitmap = null;
+        try {
+            // out = new FileOutputStream("/sdcard/aa.jpg");
+            bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+            // bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+            return bitmap;
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

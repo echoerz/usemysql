@@ -12,6 +12,8 @@
             layout="@layout/zc_input_layout"
             android:layout_width="match_parent"
             android:layout_height="280dip"
+            android:layout_marginLeft="40dip"
+            android:layout_marginRight="40dp"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/zc_progress"
             android:layout_marginTop="100dp" />

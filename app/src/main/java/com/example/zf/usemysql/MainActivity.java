@@ -2,6 +2,7 @@ package com.example.zf.usemysql;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity /*implements android.view.Ge
     private TextView touxiang_name;
     private SharedPreferences pref1;
     private DrawerLayout mDrawerLayout;
+    private ImageView pic_show;
     private static final String TAG = "MainActivity";
     Handler handler = new Handler(new Handler.Callback() {
         @Override
@@ -69,6 +71,7 @@ public class MainActivity extends AppCompatActivity /*implements android.view.Ge
       //  detector = new GestureDetector(this, this);//构建手势滑动对象
 
         //touxiang_name = (TextView)findViewById(R.id.touxiang_name);
+        pic_show = (ImageView)findViewById(R.id.show_pic);
         pref1 = PreferenceManager.getDefaultSharedPreferences(this);
         String user = pref1.getString("user","");
         //touxiang_name.setText(user);
