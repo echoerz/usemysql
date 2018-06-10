@@ -68,5 +68,13 @@ public class MainZhuYe extends BaseActivity {
                 sendBroadcast(intent);
             }
         });
+
+        change_data.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainZhuYe.this,changedata.class);
+                startActivity(intent);
+            }
+        });
     }
 }
