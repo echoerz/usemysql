@@ -1,17 +1,20 @@
-package com.example.zf.usemysql;
+package com.example.zf.usemysql.login;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.zf.usemysql.tools.DBUtils;
+import com.example.zf.usemysql.R;
 
 import java.util.HashMap;
 
@@ -27,6 +30,10 @@ public class zhuce extends AppCompatActivity {
 
     private TextView ZC_Button;
 
+    private SharedPreferences pref;
+
+    private SharedPreferences.Editor editor;
+
     private static final String TAG = "zhuce";
     Handler handler_login = new Handler(new Handler.Callback() {
         @Override
@@ -35,15 +42,15 @@ public class zhuce extends AppCompatActivity {
             // 1：密码
             // ((TextView)findViewById(R.id.tv_result)).setText(textfen[3]);
             String str = "该昵称已被注册,请重新输入";
-            cheakchong.setText(str);
             if(message.what == 1)
             {
-                //str = "注册成功";
+                str = "注册成功";
                 //Toast.makeText(zhuce.this, str, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(zhuce.this,MainActivity.class);
+                Intent intent = new Intent(zhuce.this,logintest.class);
                 startActivity(intent);
             }
             if (message.what==0){
+                cheakchong.setText(str);
                 UserCheak.setText("");
                 PasswordCheak.setText("");
                 PasswordCheakTwice.setText("");
@@ -66,6 +73,10 @@ public class zhuce extends AppCompatActivity {
         PasswordCheakTwice = (EditText)findViewById(R.id.zc_password_t_2);
         ZC_Button = (TextView) findViewById(R.id.zhuce_btn);
         cheakchong = (TextView)findViewById(R.id.cheakchong);
+
+
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
+
 
         ZC_Button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,6 +112,10 @@ public class zhuce extends AppCompatActivity {
                                 msg.what = 1;
                                 HashMap<String, String> mp1 =
                                         DBUtils.adduser(user_cheak,password_cheak);
+                                editor = pref.edit();
+                                editor.putString("user",user_cheak);
+                                editor.putString("password",password_cheak);
+                                editor.apply();
                                 //非UI线程不要试着去操作界面
                             }
                             else {

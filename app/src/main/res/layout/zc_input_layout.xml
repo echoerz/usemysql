@@ -83,7 +83,8 @@
                 android:layout_marginLeft="10dip"
                 android:background="#00000000"
                 android:padding="1dip"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:inputType="textPassword"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -125,7 +126,8 @@
                 android:layout_marginLeft="10dip"
                 android:background="#00000000"
                 android:padding="1dip"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:inputType="textPassword"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

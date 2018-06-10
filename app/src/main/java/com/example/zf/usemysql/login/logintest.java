@@ -1,10 +1,9 @@
-package com.example.zf.usemysql;
+package com.example.zf.usemysql.login;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,13 +18,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.zf.usemysql.tools.DBUtils;
+import com.example.zf.usemysql.MainActivity;
+import com.example.zf.usemysql.R;
 
 import java.util.HashMap;
 
@@ -101,8 +102,12 @@ public class logintest extends AppCompatActivity implements View.OnClickListener
                             editor = pref.edit();
                             editor.putString("user",user);
                             editor.putString("password",password);
+                            editor.putString("location",textfen[2]);
+                            editor.putString("sex",textfen[4]);
+                            editor.putString("ages",textfen[0]);
                             editor.apply();
-                            // 隐藏输入框
+                           // Log.d("logintest",text);   //0:年龄  1：密码  2：地点  3：用户名 4:性别
+                             // 隐藏输入框
                         }
                         else {msg.what=2;}
                     }
@@ -241,7 +246,7 @@ public class logintest extends AppCompatActivity implements View.OnClickListener
         zhuce.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_zhuce = new Intent(logintest.this,zhuce.class);
+                Intent intent_zhuce = new Intent(logintest.this, com.example.zf.usemysql.login.zhuce.class);
                 startActivity(intent_zhuce);
             }
         });
