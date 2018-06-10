@@ -8,8 +8,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -21,14 +20,14 @@
         <activity android:name=".logintest">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".addcontext" />
         <activity
             android:name=".MainActivity"
-            android:label="精选笔记">
-        </activity>
+            android:label="精选笔记"></activity>
         <activity android:name=".zhuce" />
 
         <provider
@@ -37,9 +36,13 @@
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
-            android:name="android.support.FILE_PROVIDER_PATHS"
-            android:resource="@xml/file_paths" />
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
         </provider>
+
+        <activity android:name=".MainZhuYe">
+
+        </activity>
     </application>
 
 </manifest>

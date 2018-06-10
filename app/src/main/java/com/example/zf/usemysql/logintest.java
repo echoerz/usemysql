@@ -101,8 +101,12 @@ public class logintest extends AppCompatActivity implements View.OnClickListener
                             editor = pref.edit();
                             editor.putString("user",user);
                             editor.putString("password",password);
+                            editor.putString("location",textfen[2]);
+                            editor.putString("sex",textfen[4]);
+                            editor.putString("ages",textfen[0]);
                             editor.apply();
-                            // 隐藏输入框
+                           // Log.d("logintest",text);   //0:年龄  1：密码  2：地点  3：用户名 4:性别
+                             // 隐藏输入框
                         }
                         else {msg.what=2;}
                     }

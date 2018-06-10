@@ -38,7 +38,8 @@ public class MainActivity extends AppCompatActivity /*implements android.view.Ge
     // 定义手势检测器实例
     GestureDetector detector;
 
-    private TextView touxiang_name;
+    public TextView touxiang_name;
+    private ImageView use_touxiang;
     private SharedPreferences pref1;
     private DrawerLayout mDrawerLayout;
     private ImageView pic_show;
@@ -48,11 +49,12 @@ public class MainActivity extends AppCompatActivity /*implements android.view.Ge
         public boolean handleMessage(Message message) {
             String text = (String) message.obj;
             String textfen[] = text.split("\n");
-            // 0:点赞数
-            // 1：主题
-            // 2：用户
-            // 3：内容
-            // 4：id号
+            // 0：图片
+            // 1:点赞数
+            // 2：主题
+            // 3：用户
+            // 4：内容
+            // 5：id号
             ((TextView) findViewById(R.id.tv_result)).setText(text);
             String str = "查询不存在";
             if (message.what == 1){
@@ -70,11 +72,16 @@ public class MainActivity extends AppCompatActivity /*implements android.view.Ge
 
       //  detector = new GestureDetector(this, this);//构建手势滑动对象
 
-        //touxiang_name = (TextView)findViewById(R.id.touxiang_name);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        touxiang_name= (TextView) headerView.findViewById(R.id.touxiang_name);  //获取用户名
+        use_touxiang = (ImageView)headerView.findViewById(R.id.use_touxiang);  //获取用户头像
+        //touxiang_name =(TextView)findViewById(R.id.touxiang_name);
+
         pic_show = (ImageView)findViewById(R.id.show_pic);
         pref1 = PreferenceManager.getDefaultSharedPreferences(this);
         String user = pref1.getString("user","");
-        //touxiang_name.setText(user);
+        touxiang_name.setText(user);
         Toast.makeText(this,"欢迎回来，"+user,Toast.LENGTH_SHORT).show();
 
        // final EditText et_name = (EditText) findViewById(R.id.et_name);
@@ -135,7 +142,19 @@ public class MainActivity extends AppCompatActivity /*implements android.view.Ge
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                mDrawerLayout.closeDrawers();
+                switch (item.getItemId()){
+                    case R.id.nav_myziyuan:
+                        mDrawerLayout.closeDrawers();
+                        break;
+                    case R.id.nav_myshoucang:
+                        mDrawerLayout.closeDrawers();
+                        break;
+                    case R.id.nav_myroom:
+                        Intent intent = new Intent(MainActivity.this,MainZhuYe.class);
+                        startActivity(intent);
+                        break;
+                    default:break;
+                }
                 return true;
             }
         });
