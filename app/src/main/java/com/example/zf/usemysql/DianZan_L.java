@@ -1,20 +1,12 @@
 package com.example.zf.usemysql;
 
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
+import com.example.zf.usemysql.login.BaseActivity;
 
 /**
  * Created by 18810 on 2018/6/8.
  */
 
-public class DianZan_L extends AppCompatActivity {
+public class DianZan_L extends BaseActivity {
 
     /*private static final String TAG = "点赞";
     Handler handler = new Handler(new Handler.Callback() {

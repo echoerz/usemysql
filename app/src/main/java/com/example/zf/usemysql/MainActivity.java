@@ -8,7 +8,6 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -22,12 +21,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.zf.usemysql.login.BaseActivity;
 import com.example.zf.usemysql.myroom.MainZhuYe;
 import com.example.zf.usemysql.tools.DBUtils;
 
 import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity /*implements android.view.GestureDetector.OnGestureListener*/{
+public class MainActivity extends BaseActivity /*implements android.view.GestureDetector.OnGestureListener*/{
 
     // 定义手势检测器实例
     GestureDetector detector;
@@ -144,7 +144,6 @@ public class MainActivity extends AppCompatActivity /*implements android.view.Ge
                         mDrawerLayout.closeDrawers();
                         break;
                     case R.id.nav_myroom:
-                        mDrawerLayout.closeDrawers();
                         Intent intent = new Intent(MainActivity.this,MainZhuYe.class);
                         startActivity(intent);
                         break;

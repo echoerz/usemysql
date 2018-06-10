@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,7 +17,7 @@ import com.example.zf.usemysql.R;
 
 import java.util.HashMap;
 
-public class zhuce extends AppCompatActivity {
+public class zhuce extends BaseActivity {
 
     public TextView cheakchong;
 
