@@ -69,7 +69,7 @@
             android:paddingLeft="15dip"
             android:paddingRight="15dip"
             android:paddingTop="2dip"
-            android:text="登陆"
+            android:text="登录"
             android:textColor="#ffffff"
             android:textSize="20sp" />
     </RelativeLayout>

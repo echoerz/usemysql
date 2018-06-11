@@ -25,11 +25,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-import java.sql.Blob;
 
 import com.example.zf.usemysql.login.BaseActivity;
 import com.example.zf.usemysql.tools.DBUtils;
-import java.io.OutputStream;
 import java.io.ByteArrayOutputStream;
 
 public class addcontext extends BaseActivity {

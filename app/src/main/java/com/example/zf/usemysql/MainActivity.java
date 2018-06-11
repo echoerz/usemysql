@@ -3,6 +3,7 @@ package com.example.zf.usemysql;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -21,12 +22,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import com.example.zf.usemysql.login.BaseActivity;
 import com.example.zf.usemysql.myroom.MainZhuYe;
 import com.example.zf.usemysql.tools.DBUtils;
-import com.example.zf.usemysql.addcontext;
+
 import java.util.HashMap;
+import static com.example.zf.usemysql.tools.DBUtils.LastID;
 
 public class MainActivity extends BaseActivity /*implements android.view.GestureDetector.OnGestureListener*/{
 
@@ -34,6 +37,7 @@ public class MainActivity extends BaseActivity /*implements android.view.Gesture
     GestureDetector detector;
 
     public TextView touxiang_name;
+    private ImageView Picture;
     private ImageView use_touxiang;
     private SharedPreferences pref1;
     private DrawerLayout mDrawerLayout;
@@ -111,9 +115,9 @@ public class MainActivity extends BaseActivity /*implements android.view.Gesture
                         }
                         handler.sendMessage(msg);
                         if(msg.what == 1) {
-                            byte[] pic = DBUtils.getpic(44);
-                            Bitmap picture = addcontext.convertStringToIcon(pic);
-                            ((ImageView) findViewById(R.id.iv_result)).setImageBitmap(picture);
+                            DBUtils.getBlob(LastID);
+                            Picture = (ImageView)findViewById(R.id.iv_result);
+                            Picture.setImageBitmap(displayImage("picture"+LastID+".jpg"));
                         }
                     }
                 }).start();
@@ -192,6 +196,17 @@ public class MainActivity extends BaseActivity /*implements android.view.Gesture
         }
         return super.onKeyDown(keyCode, event);
     }
+
+    private Bitmap displayImage(String imagePath) {
+        if (imagePath!=null){
+            Bitmap mypic = BitmapFactory.decodeFile(imagePath);
+            return mypic;
+        }else {
+            Toast.makeText(this,"主人我无法偷到照片嘤嘤嘤",Toast.LENGTH_SHORT).show();
+        }
+        return null;
+    }
+
 
 /*
     // 将该activity上的触碰事件交给GestureDetector处理

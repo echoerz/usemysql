@@ -13,9 +13,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Random;
-import java.io.PrintStream;
+
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 
 /**
  * Created by zf on 2018/6/5.
@@ -23,6 +25,9 @@ import java.io.FileInputStream;
 
 public class DBUtils {
     private static final String TAG = "DBUtils";
+
+    public static int LastID;
+
     private static Connection getConnection(String dbName) {
         Connection conn = null;
         try {
@@ -94,12 +99,12 @@ public class DBUtils {
         }
     }
 
-
+/*
     public static byte[] getpic(int id) {
         Connection conn = getConnection("test");
         try {
             Statement st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            String sql = "select picadd from framgment where id = " + id;
+            String sql = "select picadd from framgment limit  " + id + ",1";
             ResultSet res = st.executeQuery(sql);
             if (res == null) {
                 return null;
@@ -137,6 +142,34 @@ public class DBUtils {
             Log.d(TAG, " 数据操作异常");
             return null;
         }
+    }*/
+
+    public static void getBlob(int ID){//读取Blob数据
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            Connection conn = getConnection("test");
+            String sql = "select picadd from framgment limit  " + ID + ",1";
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                Blob picture = rs.getBlob(1);//得到Blob对象
+                //开始读入文件
+                InputStream in = picture.getBinaryStream();
+                OutputStream out = new FileOutputStream("picture"+ID+".png");
+                byte[] buffer = new byte[1024];
+                int len = 0;
+                while((len = in.read(buffer)) != -1){
+                    out.write(buffer, 0, len);
+                }
+            }
+            ps.close();
+            rs.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static HashMap<String, String> ChackID() {
@@ -144,10 +177,11 @@ public class DBUtils {
         int a= findhangshu();
         Random random = new Random();
         int name=random.nextInt(a) + 1;
+        LastID = name;
         Connection conn = getConnection("test");
         try {
             Statement st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            String sql = "select * from framgment limit  " + name + ",1";
+            String sql = "select username,title,context,zan from framgment limit  " + name + ",1";
             ResultSet res = st.executeQuery(sql);
             if (res == null) {
                 return null;
