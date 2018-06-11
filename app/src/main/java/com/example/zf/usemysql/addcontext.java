@@ -25,18 +25,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+import java.sql.Blob;
 
 import com.example.zf.usemysql.login.BaseActivity;
 import com.example.zf.usemysql.tools.DBUtils;
-
+import java.io.OutputStream;
 import java.io.ByteArrayOutputStream;
 
 public class addcontext extends BaseActivity {
     private ImageView picture;
     private Uri imageUri;
     public static final int CHOOSE_PHOTO = 2;
+    public String imagePath = null;
     private static final String TAG = "addcontext";
-    public byte[] picadd;
+    public byte[] picadd = new byte[1024];
     private SharedPreferences pref2;
     Handler handler = new Handler(new Handler.Callback() {
         @Override
@@ -65,6 +67,7 @@ public class addcontext extends BaseActivity {
             public void onClick(View v) {
                 final String title = add_title.getText().toString().trim();
                 final String context = add_context.getText().toString().trim();
+                //final Blob picture = org.hibernate.Hibernate.Hibernate.createBlob(picadd);
                 Log.e(TAG,title);
                 Log.e(TAG,context);
                 if(title == null || title.equals("") ||context == null || context.equals("")) {
@@ -74,7 +77,8 @@ public class addcontext extends BaseActivity {
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            DBUtils.AddData(title,context,user);
+                            DBUtils.AddData(title,context,user,imagePath);
+                            //DBUtils.AddPicture();
                             Message msg = new Message();
                           //  msg.what = 0;
                          //   msg.obj =  "查询失败，请检查网络是否连接成功";
@@ -141,13 +145,12 @@ public class addcontext extends BaseActivity {
 
     private void handleImageBeforeKiKat(Intent data) {
         Uri uri = data.getData();
-        String imagePath = getImagePath(uri,null);
+        imagePath = getImagePath(uri,null);
         displayImage(imagePath);
     }
 
     @TargetApi(19)
     private void handleImageOnKitKat(Intent data) {
-        String imagePath = null;
         Uri uri = data.getData();
         if (DocumentsContract.isDocumentUri(this,uri)){
             String docId = DocumentsContract.getDocumentId(uri);
@@ -176,8 +179,8 @@ public class addcontext extends BaseActivity {
             Bitmap mypic = BitmapFactory.decodeFile(imagePath);
             picadd = convertIconToString(mypic);
             //  org.hibernate.Hibernate.Hibernate.createBlob(new byte[1024]);
-            Bitmap a = convertStringToIcon(picadd);
-            picture.setImageBitmap(a);
+            //Bitmap a = convertStringToIcon(picadd);
+            picture.setImageBitmap(mypic);
         }else {
             Toast.makeText(this,"主人我无法偷到照片嘤嘤嘤",Toast.LENGTH_SHORT).show();
         }
@@ -216,6 +219,7 @@ public class addcontext extends BaseActivity {
         byte[] bytes = baos.toByteArray();// 转为byte数组
         return bytes;
     }
+
 
     /**
      * string转成bitmap

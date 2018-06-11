@@ -7,11 +7,15 @@ import java.io.IOException;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Random;
+import java.io.PrintStream;
+import java.io.InputStream;
+import java.io.FileInputStream;
 
 /**
  * Created by zf on 2018/6/5.
@@ -90,12 +94,12 @@ public class DBUtils {
         }
     }
 
-    /*
-    public static byte[] getpic() {
+
+    public static byte[] getpic(int id) {
         Connection conn = getConnection("test");
         try {
             Statement st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            String sql = "select picadd from framgment";
+            String sql = "select picadd from framgment where id = " + id;
             ResultSet res = st.executeQuery(sql);
             if (res == null) {
                 return null;
@@ -134,7 +138,7 @@ public class DBUtils {
             return null;
         }
     }
-*/
+
     public static HashMap<String, String> ChackID() {
         HashMap<String, String> map = new HashMap<>();
         int a= findhangshu();
@@ -150,7 +154,7 @@ public class DBUtils {
             } else {
                 int cnt = res.getMetaData().getColumnCount();
                 res.last();
-                int count = res.getRow();
+                //int count = res.getRow();
                 res.beforeFirst();
                 //res.last(); int rowCnt = res.getRow(); res.first();
                 res.next();
@@ -171,16 +175,20 @@ public class DBUtils {
         }
     }
 
-    public static HashMap<String, String> AddData(String title,String context,String username) {
+    public static HashMap<String, String> AddData(String title,String context,String username,String path) {
         HashMap<String, String> map = new HashMap<>();
         Connection connadd = getConnection("test");
+        PreparedStatement ps = null;
         try {
-            Statement st = connadd.createStatement();
-            String sql = "insert into framgment(zan,title,context,username) " +
-                    "values( 0,'"+title+"','"+context+"','"+username+"')";
-            st.executeUpdate(sql);
+            String sql = "insert into framgment(zan,title,context,username,picadd) " +
+                    "values( 0,'"+title+"','"+context+"','"+username+"',?)";
+            ps = connadd.prepareStatement(sql);
+            InputStream in = new FileInputStream(path);//生成被插入文件的节点流
+            //设置Blob
+            ps.setBlob(1, in);
+            ps.executeUpdate();
             connadd.close();
-            st.close();
+            ps.close();
            // res.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -189,8 +197,6 @@ public class DBUtils {
         }
         return null;
     }
-
-
 
 
     public static HashMap<String, String> adduser(String title,String context) {
@@ -245,4 +251,7 @@ public class DBUtils {
         }
         return null;
     }
+
+
+
 }

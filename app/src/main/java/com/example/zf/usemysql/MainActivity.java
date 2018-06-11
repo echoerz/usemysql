@@ -2,6 +2,7 @@ package com.example.zf.usemysql;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -24,7 +25,7 @@ import android.widget.Toast;
 import com.example.zf.usemysql.login.BaseActivity;
 import com.example.zf.usemysql.myroom.MainZhuYe;
 import com.example.zf.usemysql.tools.DBUtils;
-
+import com.example.zf.usemysql.addcontext;
 import java.util.HashMap;
 
 public class MainActivity extends BaseActivity /*implements android.view.GestureDetector.OnGestureListener*/{
@@ -109,6 +110,11 @@ public class MainActivity extends BaseActivity /*implements android.view.Gesture
                             msg.obj = ss;
                         }
                         handler.sendMessage(msg);
+                        if(msg.what == 1) {
+                            byte[] pic = DBUtils.getpic(44);
+                            Bitmap picture = addcontext.convertStringToIcon(pic);
+                            ((ImageView) findViewById(R.id.iv_result)).setImageBitmap(picture);
+                        }
                     }
                 }).start();
             }
