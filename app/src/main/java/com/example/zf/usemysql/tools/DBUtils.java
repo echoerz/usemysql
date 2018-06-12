@@ -2,7 +2,10 @@ package com.example.zf.usemysql.tools;
 
 import android.util.Log;
 
+import com.example.zf.usemysql.MainActivity;
+
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.sql.Blob;
 import java.sql.Connection;
@@ -148,20 +151,22 @@ public class DBUtils {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
+        String content = null;
         try {
             Connection conn = getConnection("test");
-            String sql = "select picadd from framgment limit  " + ID + ",1";
+            String sql = "select picadd from framgment where id = 45";
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             if(rs.next()){
                 Blob picture = rs.getBlob(1);//得到Blob对象
                 //开始读入文件
                 InputStream in = picture.getBinaryStream();
-                OutputStream out = new FileOutputStream("picture"+ID+".png");
+                File a = new File("picture1.png");
+                OutputStream out = new FileOutputStream(a);
                 byte[] buffer = new byte[1024];
-                int len = 0;
-                while((len = in.read(buffer)) != -1){
-                    out.write(buffer, 0, len);
+                int len = -1;
+                while((len =in.read())!=-1){
+                    out.write(len);
                 }
             }
             ps.close();
