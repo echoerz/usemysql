@@ -8,8 +8,7 @@
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:background="#7adfb8">
+        android:layout_width="match_parent">
 
         <android.support.v7.widget.Toolbar
             android:background="#7adfb8"
@@ -21,34 +20,42 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-            <FrameLayout
-                android:id="@+id/main_fl_container"
+            <Button
+                android:id="@+id/btn_01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:text="点击获取段子"/>
+            <TextView
+                android:id="@+id/tv_result"
+                android:layout_marginLeft="60dp"
+                android:text="此处显示结果"
                 android:layout_centerInParent="true"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:onClick="flipCard"
-                android:paddingBottom="@dimen/activity_vertical_margin"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:paddingTop="@dimen/activity_vertical_margin">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/iv_result"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_result"/>
 
-                <include
-                    layout="@layout/cell_card_back"/>
+            <Button
+                android:id="@+id/add_context"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:text="点击添加段子"/>
 
-                <include
-                    layout="@layout/cell_card_front"/>
-
-            </FrameLayout>
-
+            <ImageView
+                android:id="@+id/show_pic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@+id/btn_01"
+                />
         </RelativeLayout>
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/addsomething"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="8dp"
-            android:src="@mipmap/add"
-            app:elevation="8dp"/>
     </FrameLayout>
 
     <android.support.design.widget.NavigationView

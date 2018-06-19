@@ -1,12 +1,14 @@
 package com.example.zf.usemysql.tools;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
-import com.example.zf.usemysql.MainActivity;
-
 import java.io.BufferedInputStream;
-import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -46,7 +48,6 @@ public class DBUtils {
         }
         return conn;
     }
-
 
     public static HashMap<String, String> CheakUser(String name) {
         HashMap<String, String> map = new HashMap<>();
@@ -102,71 +103,26 @@ public class DBUtils {
         }
     }
 
+
 /*
-    public static byte[] getpic(int id) {
-        Connection conn = getConnection("test");
-        try {
-            Statement st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            String sql = "select picadd from framgment limit  " + id + ",1";
-            ResultSet res = st.executeQuery(sql);
-            if (res == null) {
-                return null;
-            } else {
-                if(res.next()){
-                    res.first();
-                    Blob blob=res.getBlob("picadd");
-                    BufferedInputStream is = null;
-                    try {
-                        is = new BufferedInputStream(blob.getBinaryStream());
-                        byte[] bytes = new byte[(int) blob.length()];
-                        int len = bytes.length;
-                        int offset = 0;
-                        int read = 0;
-
-                        while (offset < len && (read = is.read(bytes, offset, len - offset)) >= 0) {
-                            offset += read;
-                        }
-                        return bytes;
-                    } catch (Exception e) {
-                        return null;
-                    } finally {
-                        try {
-                            is.close();
-                            is = null;
-                        } catch (IOException e) {
-                            return null;
-                        }
-                    }
-                }
-                return null;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.d(TAG, " 数据操作异常");
-            return null;
-        }
-    }*/
-
     public static void getBlob(int ID){//读取Blob数据
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String content = null;
         try {
             Connection conn = getConnection("test");
-            String sql = "select picadd from framgment where id = 45";
+            String sql = "select picadd from framgment limit  " + ID + ",1";
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             if(rs.next()){
                 Blob picture = rs.getBlob(1);//得到Blob对象
                 //开始读入文件
                 InputStream in = picture.getBinaryStream();
-                File a = new File("picture1.png");
-                OutputStream out = new FileOutputStream(a);
+                OutputStream out = new FileOutputStream("picture"+ID+".png");
                 byte[] buffer = new byte[1024];
-                int len = -1;
-                while((len =in.read())!=-1){
-                    out.write(len);
+                int len = 0;
+                while((len = in.read(buffer)) != -1){
+                    out.write(buffer, 0, len);
                 }
             }
             ps.close();
@@ -176,6 +132,8 @@ public class DBUtils {
             e.printStackTrace();
         }
     }
+*/
+
 
     public static HashMap<String, String> ChackID() {
         HashMap<String, String> map = new HashMap<>();
@@ -219,12 +177,12 @@ public class DBUtils {
         Connection connadd = getConnection("test");
         PreparedStatement ps = null;
         try {
-            String sql = "insert into framgment(zan,title,context,username,picadd) " +
-                    "values( 0,'"+title+"','"+context+"','"+username+"',?)";
+            String sql = "insert into framgment(zan,title,context,username,piccheck) " +
+                    "values( 0,'"+title+"','"+context+"','"+username+"',0)";
             ps = connadd.prepareStatement(sql);
-            InputStream in = new FileInputStream(path);//生成被插入文件的节点流
+           // InputStream in = new FileInputStream(path);//生成被插入文件的节点流
             //设置Blob
-            ps.setBlob(1, in);
+           // ps.setBlob(1, in);
             ps.executeUpdate();
             connadd.close();
             ps.close();

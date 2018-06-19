@@ -40,8 +40,9 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".myroom.MainZhuYe"></activity>
-        <activity android:name=".myroom.changedata"></activity>
+        <activity android:name=".myroom.MainZhuYe" />
+        <activity android:name=".myroom.changedata" />
+        <activity android:name=".myupdata"></activity>
     </application>
 
 </manifest>
