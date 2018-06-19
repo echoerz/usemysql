@@ -32,7 +32,7 @@ public class DBUtils {
     private static final String TAG = "DBUtils";
 
     public static int LastID;
-
+    public static int cnt=0;
     private static Connection getConnection(String dbName) {
         Connection conn = null;
         try {
@@ -77,6 +77,36 @@ public class DBUtils {
             return null;
         }
     }
+
+
+    public static String findupdata(String username) {
+        Connection conn = getConnection("test");
+        String ss= null;
+        try {
+            Statement st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            String sql = "select id,title,context,zan from framgment where username = '"+username+"'";
+            ResultSet res = st.executeQuery(sql);
+            if (res == null) {
+                return null;
+            } else {
+                while (res.next()) {
+                    ss = ss+res.getInt("id") + "cccc\n"
+                            + res.getString("title") + "cccc\n"
+                            + res.getString("context") + "cccc\n"
+                            + res.getInt("zan") + "ddd\n";
+                }
+                conn.close();
+                st.close();
+                res.close();
+                return ss;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.d(TAG, " 数据操作异常");
+            return null;
+        }
+    }
+
 
     public static int findhangshu() {
         Connection conn = getConnection("test");

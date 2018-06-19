@@ -152,7 +152,8 @@ public class MainActivity extends BaseActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.nav_myziyuan:
-                        mDrawerLayout.closeDrawers();
+                        Intent intent1 = new Intent(MainActivity.this,myupdata.class);
+                        startActivity(intent1);
                         break;
                     case R.id.nav_myshoucang:
                         mDrawerLayout.closeDrawers();
