@@ -4,10 +4,10 @@
     android:background="#7adfb8">
 
     <TextView
-        android:id="@+id/show_myupdata"
+        android:id="@+id/show_mylove"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:text="此处显示上传"
+        android:text="此处显示收藏"
         />
 
 </LinearLayout>

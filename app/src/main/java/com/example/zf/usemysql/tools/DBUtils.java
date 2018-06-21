@@ -108,6 +108,9 @@ public class DBUtils {
     }
 
 
+
+
+
     public static int findhangshu() {
         Connection conn = getConnection("test");
         try {
@@ -168,13 +171,16 @@ public class DBUtils {
     public static HashMap<String, String> ChackID() {
         HashMap<String, String> map = new HashMap<>();
         int a= findhangshu();
+        //int a= Integer.parseInt((String)"2");
         Random random = new Random();
         int name=random.nextInt(a) + 1;
-        LastID = name;
+        LastID=name;
         Connection conn = getConnection("test");
+
         try {
             Statement st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            String sql = "select username,title,context,zan from framgment limit  " + name + ",1";
+            //String sql = "create table tb_emp1(id  INT(11))";
+            String sql = "select username,title,context,zan,id from framgment limit  " + name + ",1";
             ResultSet res = st.executeQuery(sql);
             if (res == null) {
                 return null;
@@ -186,6 +192,7 @@ public class DBUtils {
                 //res.last(); int rowCnt = res.getRow(); res.first();
                 res.next();
                 for (int i = 1; i <= cnt; ++i) {
+                   // if (i==1){LastID = res.getInt("id");}
                     String field = res.getMetaData().getColumnLabel(i);
                     map.put(field, res.getString(field));
                     //Log.d("DBUtils","aaaa:"+res.getString(field));
@@ -225,14 +232,15 @@ public class DBUtils {
         return null;
     }
 
-
     public static HashMap<String, String> adduser(String title,String context) {
-        HashMap<String, String> map = new HashMap<>();
+       // HashMap<String, String> map = new HashMap<>();
         Connection connadd = getConnection("test");
+        String tableSql = "create table "+title+" (love int(255) not null)";
         try {
             Statement st = connadd.createStatement();
             String sql = "insert into users(username,password) " +
                     "values( '"+title+"','"+context+"')";
+            st.executeUpdate(tableSql);//DDL语句返回值为0;
             st.executeUpdate(sql);
             connadd.close();
             st.close();

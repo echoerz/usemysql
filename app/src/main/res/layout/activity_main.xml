@@ -34,27 +34,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <ImageView
-                android:id="@+id/iv_result"
-                android:layout_centerInParent="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_result"/>
-
-            <Button
-                android:id="@+id/add_context"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
+                android:id="@+id/show_pic"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
-                android:text="点击添加段子"/>
-
-            <ImageView
-                android:id="@+id/show_pic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_toRightOf="@+id/btn_01"
-                />
+                android:src="@mipmap/love"
+               />
         </RelativeLayout>
     </FrameLayout>
 

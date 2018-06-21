@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/add_biao"
-        android:icon="@mipmap/myroom"
+        android:icon="@mipmap/addcontect"
         android:title="增加主题"
         app:showAsAction="always"/>
 

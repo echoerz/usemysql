@@ -42,9 +42,8 @@
 
         <activity android:name=".myroom.MainZhuYe" />
         <activity android:name=".myroom.changedata" />
-        <activity android:name=".myupdata">
-
-        </activity>
+        <activity android:name=".myupdata"></activity>
+        <activity android:name=".mylove"></activity>
     </application>
 
 </manifest>

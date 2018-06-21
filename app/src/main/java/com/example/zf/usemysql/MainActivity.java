@@ -28,6 +28,7 @@ import android.graphics.BitmapFactory;
 import com.example.zf.usemysql.login.BaseActivity;
 import com.example.zf.usemysql.myroom.MainZhuYe;
 import com.example.zf.usemysql.tools.DBUtils;
+import com.example.zf.usemysql.tools.love;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -48,15 +49,18 @@ public class MainActivity extends BaseActivity {
     private DrawerLayout mDrawerLayout;
     private ImageView pic_show;
     private static final String TAG = "MainActivity";
+    private static String user;
+    private static int userid;
     Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message message) {
             String text = (String) message.obj;
             String textfen[] = text.split("aaaa\n");
-            Bitmap bitmap=convertStringToIcon(textfen[4]);
+            userid= Integer.parseInt(textfen[3]);
+            Bitmap bitmap=convertStringToIcon(textfen[5]);
            //0-3数据   4图片
-            ((ImageView) findViewById(R.id.show_pic)).setImageBitmap(bitmap);
-            ((TextView) findViewById(R.id.tv_result)).setText(textfen[0]+"\n"+textfen[1]+"\n"+textfen[2]+"\n"+textfen[3]+"\n");
+            //((ImageView) findViewById(R.id.show_pic)).setImageBitmap(bitmap);
+            ((TextView) findViewById(R.id.tv_result)).setText(textfen[0]+"\n"+textfen[1]+"\n"+textfen[2]+"\n"+textfen[3]+"\n"+textfen[4]+"\n");
             String str = "查询不存在";
             if (message.what == 1){
                 str = "查询成功";
@@ -80,7 +84,7 @@ public class MainActivity extends BaseActivity {
 
         pic_show = (ImageView)findViewById(R.id.show_pic);
         pref1 = PreferenceManager.getDefaultSharedPreferences(this);
-        String user = pref1.getString("user","");
+        user= pref1.getString("user","");
         touxiang_name.setText(user);
         Toast.makeText(this,"欢迎回来，"+user,Toast.LENGTH_SHORT).show();
 
@@ -128,14 +132,23 @@ public class MainActivity extends BaseActivity {
             }
             // }
         });
-        Button addcontext = (Button) findViewById(R.id.add_context);
-        addcontext.setOnClickListener(new View.OnClickListener() {
+
+        (findViewById(R.id.show_pic)).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, addcontext.class);
-                startActivity(intent);
+            public void onClick(View view) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        love.Addlove(userid,user);
+                    }
+                }).start();
+                Toast.makeText(MainActivity.this,"已收藏",Toast.LENGTH_SHORT).show();
             }
+            // }
         });
+
+
+
 
 
         android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar)findViewById(R.id.toolbar);
@@ -156,11 +169,12 @@ public class MainActivity extends BaseActivity {
                         startActivity(intent1);
                         break;
                     case R.id.nav_myshoucang:
-                        mDrawerLayout.closeDrawers();
+                        Intent intent2 = new Intent(MainActivity.this,mylove.class);
+                        startActivity(intent2);
                         break;
                     case R.id.nav_myroom:
-                        Intent intent = new Intent(MainActivity.this,MainZhuYe.class);
-                        startActivity(intent);
+                        Intent intent3 = new Intent(MainActivity.this,MainZhuYe.class);
+                        startActivity(intent3);
                         break;
                     default:break;
                 }
@@ -183,7 +197,8 @@ public class MainActivity extends BaseActivity {
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 break;
             case R.id.add_biao:
-                Toast.makeText(this,"success",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, addcontext.class);
+                startActivity(intent);
                 break;
             default:break;
         }
