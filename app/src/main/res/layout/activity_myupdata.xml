@@ -1,13 +1,15 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#7adfb8">
+    android:background="#fff">
 
-    <TextView
-        android:id="@+id/show_myupdata"
-        android:layout_height="wrap_content"
+    <ListView
         android:layout_width="match_parent"
-        android:text="此处显示上传"
-        />
+        android:layout_height="match_parent"
+        android:id="@+id/list_view"
+        >
+    </ListView>
 
-</LinearLayout>
+</android.support.v4.widget.DrawerLayout>

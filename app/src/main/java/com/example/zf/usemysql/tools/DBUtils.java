@@ -84,14 +84,13 @@ public class DBUtils {
         String ss= null;
         try {
             Statement st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            String sql = "select id,title,context,zan from framgment where username = '"+username+"'";
+            String sql = "select title,context,zan from framgment where username = '"+username+"'";
             ResultSet res = st.executeQuery(sql);
             if (res == null) {
                 return null;
             } else {
                 while (res.next()) {
-                    ss = ss+res.getInt("id") + "cccc\n"
-                            + res.getString("title") + "cccc\n"
+                    ss = ss + res.getString("title") + "cccc\n"
                             + res.getString("context") + "cccc\n"
                             + res.getInt("zan") + "ddd\n";
                 }
