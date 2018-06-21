@@ -288,5 +288,21 @@ public class DBUtils {
     }
 
 
+    public static int changemessage(String username,String sex,String age, String location){
+        Connection conn = getConnection("test");
+        try {
+            Statement st = conn.createStatement();
+            String sql = "UPDATE users SET sex='"+sex+"',years=" + age+",location='"+location+"'where username = '" + username + "'";
 
+           // String sql = "update users set sex='"+sex+"',set years="+age+",set location='"+location+"' where username = '" + username + "'";
+            st.executeUpdate(sql);
+            conn.close();
+            st.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.d(TAG, " 数据操作异常");
+            return 0;
+        }
+        return 0;
+    }
 }
