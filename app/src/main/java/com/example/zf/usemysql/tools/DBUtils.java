@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import com.example.zf.usemysql.MainActivity;
+import com.example.zf.usemysql.addcontext;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -220,7 +221,7 @@ public class DBUtils {
         }
     }
 
-    public static HashMap<String, String> AddData(String title,String context,String username,String path) {
+    public static HashMap<String, String> AddDatawithpic(String title,String context,String username,String path) {
         HashMap<String, String> map = new HashMap<>();
         Connection connadd = getConnection("test");
         PreparedStatement ps = null;
@@ -245,6 +246,31 @@ public class DBUtils {
         }
         return null;
     }
+
+
+    public static HashMap<String, String> AddDatanopic(String title,String context,String username) {
+        HashMap<String, String> map = new HashMap<>();
+        Connection connadd = getConnection("test");
+        PreparedStatement ps = null;
+        try {
+            String sql = "insert into framgment(zan,title,context,username,piccheck) " +
+                    "values( 0,?,?,?,0)";
+            ps = connadd.prepareStatement(sql);
+            ps.setString(1,title);
+            ps.setString(2,context);
+            ps.setString(3,username);
+            ps.executeUpdate();
+            connadd.close();
+            ps.close();
+            // res.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.d(TAG, " 数据操作异常");
+            return null;
+        }
+        return null;
+    }
+
 
 
     public static HashMap<String, String> adduser(String title,String context) {

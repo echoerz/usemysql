@@ -5,7 +5,11 @@
     <item
         android:id="@+id/add_biao"
         android:icon="@mipmap/addcontect"
-        android:title="增加主题"
-        app:showAsAction="always"/>
-
+        android:title="上传笔记"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/show_pic"
+        android:icon="@mipmap/love"
+        android:title="加入收藏"
+        app:showAsAction="never"/>
 </menu>
