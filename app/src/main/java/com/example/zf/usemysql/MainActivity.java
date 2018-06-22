@@ -73,7 +73,6 @@ public class MainActivity extends BaseActivity {
 
             checkpic=textfen[4];
            //0-3数据   4图片
-            ((ImageView) findViewById(R.id.show_pic)).setImageBitmap(bitmap);
 
             String str = "查询不存在";
             if (message.what == 1){
