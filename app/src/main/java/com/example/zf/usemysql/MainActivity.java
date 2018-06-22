@@ -57,7 +57,7 @@ public class MainActivity extends BaseActivity {
             String text = (String) message.obj;
             String textfen[] = text.split("aaaa\n");
             ((TextView) findViewById(R.id.main_username)).setText(textfen[0]);
-            ((TextView) findViewById(R.id.main_title)).setText(textfen[3]);
+            ((TextView) findViewById(R.id.main_title)).setText(textfen[1]);
             ((TextView) findViewById(R.id.main_context)).setText(textfen[2]);
             ((TextView) findViewById(R.id.main_zan)).setText("点赞数："+textfen[4]);
             userid= Integer.parseInt(textfen[3]);

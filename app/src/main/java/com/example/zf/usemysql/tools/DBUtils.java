@@ -196,7 +196,7 @@ public class DBUtils {
                 return null;
             } else {
                 while (res.next()) {
-                    ss = ss+res.getString("username") + "aaaa\n"
+                    ss = res.getString("username") + "aaaa\n"
                             + res.getString("title") + "aaaa\n"
                             + res.getString("context") + "aaaa\n"
                             + res.getInt("id") + "aaaa\n"
