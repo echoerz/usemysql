@@ -9,12 +9,14 @@ public class Love_item {
     public String user;
     public String context;
     public int zan;
+    public int picid;
 
-    public Love_item(String t,String c,int z,String u){
+    public Love_item(String t,String c,int z,String u,int p){
         this.title = t;
         this.user = u;
         this.context = c;
         this.zan = z;
+        this.picid = p;
     }
 
     public String getTitle(){
@@ -27,6 +29,9 @@ public class Love_item {
 
     public int getZan() {
         return zan;
+    }
+    public int getPicID() {
+        return picid;
     }
 
     public String getUser(){ return user; }

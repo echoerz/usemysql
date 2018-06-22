@@ -2,6 +2,8 @@ package com.example.zf.usemysql;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
@@ -15,8 +17,13 @@ import android.widget.TextView;
 import com.example.zf.usemysql.tools.DBUtils;
 import com.example.zf.usemysql.tools.love;
 
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.zf.usemysql.MainActivity.convertIconToString;
 
 public class mylove extends AppCompatActivity {
     private SharedPreferences prefupdata;
@@ -31,14 +38,15 @@ public class mylove extends AppCompatActivity {
             int length = textfen.length;
             Love_item loves[] = new Love_item[length];
             for(int i=0;i<length;i++) {
-                Love_item data = new Love_item("", "",0,"");
+                Love_item data = new Love_item("", "",0,"",0);
                 String textfen2[] = textfen[i].split("cccc\n");
                 data.user = textfen2[0];
                 data.title = textfen2[1];
                 data.context = textfen2[2];
                 if(data.context.length()>30)
                     data.context = data.context.substring(0,30)+"......";
-                data.zan = Integer.parseInt((textfen2[3]))-48;
+                data.zan = Integer.parseInt((textfen2[3]));
+                data.picid = Integer.parseInt((textfen2[4]));
                 loves[i] = data;
                 data = null;
                 LoveList.add(loves[i]);
