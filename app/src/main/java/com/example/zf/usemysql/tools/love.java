@@ -73,9 +73,10 @@ public class love {
                 while (res.next()) {
                     id = res.getInt("love");
                     if(ss == null){
-                        ss = love.findlove(id) + "ddd\n";
-                    }else{
-                    ss = ss+love.findlove(id) + "ddd\n";}
+                        ss = love.findlove(id);
+                    }else {
+                        ss = ss + love.findlove(id);
+                    }
                 }
                 conn.close();
                 st.close();
@@ -100,21 +101,12 @@ public class love {
                 return null;
             } else {
                 while (res.next()) {
-                    if(ss == null) {
-                        ss =  res.getString("username") + "cccc\n"
-                                + res.getString("title") + "cccc\n"
-                                + res.getString("context") + "cccc\n"
-                                + res.getInt("zan")+ "cccc\n"
-                                + res.getInt("id") + "cccc\n"
-                                + res.getInt("piccheck");
-                    }else{
-                        ss = ss + res.getString("username") + "cccc\n"
-                                + res.getString("title") + "cccc\n"
-                                + res.getString("context") + "cccc\n"
-                                + res.getInt("zan")+ "cccc\n"
-                                + res.getInt("id") + "cccc\n"
-                                + res.getInt("piccheck");
-                    }
+                    ss =  res.getString("username") + "cccc\n"
+                            + res.getString("title") + "cccc\n"
+                            + res.getString("context") + "cccc\n"
+                            + res.getInt("zan")+ "cccc\n"
+                            + res.getInt("id") + "cccc\n"
+                            + res.getInt("piccheck")+ "ddd\n";
                 }
                 conn.close();
                 st.close();

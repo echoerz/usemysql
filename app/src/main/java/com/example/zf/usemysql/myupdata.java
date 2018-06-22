@@ -45,9 +45,8 @@ public class myupdata extends AppCompatActivity {
                 data.context = textfen2[1];
                 if(data.context.length()>30)
                     data.context = data.context.substring(0,30)+"......";
-                data.zan = Integer.parseInt((textfen2[2]))-48;
+                data.zan = Integer.parseInt((textfen2[2]));
                 updata[i] = data;
-                data = null;
                 updataList.add(updata[i]);
             }
 

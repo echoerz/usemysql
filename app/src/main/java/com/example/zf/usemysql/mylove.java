@@ -40,6 +40,7 @@ public class mylove extends AppCompatActivity {
             for(int i=0;i<length;i++) {
                 Love_item data = new Love_item("", "",0,"",0);
                 String textfen2[] = textfen[i].split("cccc\n");
+                System.out.print(textfen[i]);
                 data.user = textfen2[0];
                 data.title = textfen2[1];
                 data.context = textfen2[2];
@@ -48,7 +49,6 @@ public class mylove extends AppCompatActivity {
                 data.zan = Integer.parseInt((textfen2[3]));
                 data.picid = Integer.parseInt((textfen2[4]));
                 loves[i] = data;
-                data = null;
                 LoveList.add(loves[i]);
             }
 
