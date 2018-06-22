@@ -26,15 +26,19 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.classichu.lineseditview.LinesEditView;
 import com.example.zf.usemysql.login.BaseActivity;
 import com.example.zf.usemysql.tools.DBUtils;
 import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 public class addcontext extends BaseActivity {
     private ImageView picture;
     private Uri imageUri;
     public static final int CHOOSE_PHOTO = 2;
-    public String imagePath = null;
+    public static String imagePath;
     private static final String TAG = "addcontext";
     public byte[] picadd = new byte[1024];
     private SharedPreferences pref2;
@@ -54,9 +58,14 @@ public class addcontext extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addcontext);
 
+
+       // mClassicLinesEditView.setContentText("ContentText");
+
+
         picture =(ImageView)findViewById(R.id.picture);
         final EditText add_title = (EditText)findViewById(R.id.add_title);
-        final EditText add_context = (EditText)findViewById(R.id.add_data);
+        final LinesEditView mClassicLinesEditView = (LinesEditView)findViewById(R.id.add_text);
+        mClassicLinesEditView.setHintText("在此输入正文...");
         pref2 = PreferenceManager.getDefaultSharedPreferences(this);
         final String user = pref2.getString("user","");
         Button add_create = (Button)findViewById(R.id.add_create);
@@ -64,7 +73,8 @@ public class addcontext extends BaseActivity {
             @Override
             public void onClick(View v) {
                 final String title = add_title.getText().toString().trim();
-                final String context = add_context.getText().toString().trim();
+                final String context = mClassicLinesEditView.getContentText().toString().trim();
+                final String imagePath1=imagePath;
                 //final Blob picture = org.hibernate.Hibernate.Hibernate.createBlob(picadd);
                 Log.e(TAG,title);
                 Log.e(TAG,context);
@@ -75,7 +85,7 @@ public class addcontext extends BaseActivity {
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            DBUtils.AddData(title,context,user,imagePath);
+                            DBUtils.AddData(title,context,user,imagePath1);
                             //DBUtils.AddPicture();
                             Message msg = new Message();
                           //  msg.what = 0;
@@ -86,7 +96,7 @@ public class addcontext extends BaseActivity {
                         }
                     }).start();
                     add_title.setText("");
-                    add_context.setText("");
+                    mClassicLinesEditView.setContentText("");
                 }
             }
         });

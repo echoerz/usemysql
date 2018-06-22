@@ -4,7 +4,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 
+import com.example.zf.usemysql.MainActivity;
+
 import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -208,16 +211,19 @@ public class DBUtils {
         Connection connadd = getConnection("test");
         PreparedStatement ps = null;
         try {
-            String sql = "insert into framgment(zan,title,context,username,piccheck) " +
-                    "values( 0,'"+title+"','"+context+"','"+username+"',0)";
+            String sql = "insert into framgment(zan,title,context,username,piccheck,picture) " +
+                    "values( 0,?,?,?,1,?)";
             ps = connadd.prepareStatement(sql);
-           // InputStream in = new FileInputStream(path);//生成被插入文件的节点流
-            //设置Blob
-           // ps.setBlob(1, in);
+            InputStream in = new FileInputStream(path);//生成被插入文件的节点流
+            Log.d("dubug", String.valueOf(in.available()));
+            ps.setString(1,title);
+            ps.setString(2,context);
+            ps.setString(3,username);
+            ps.setBlob(4, in);
             ps.executeUpdate();
             connadd.close();
             ps.close();
-           // res.close();
+            // res.close();
         } catch (Exception e) {
             e.printStackTrace();
             Log.d(TAG, " 数据操作异常");
@@ -225,6 +231,7 @@ public class DBUtils {
         }
         return null;
     }
+
 
     public static HashMap<String, String> adduser(String title,String context) {
        // HashMap<String, String> map = new HashMap<>();
@@ -287,8 +294,6 @@ public class DBUtils {
         try {
             Statement st = conn.createStatement();
             String sql = "UPDATE users SET sex='"+sex+"',years=" + age+",location='"+location+"'where username = '" + username + "'";
-
-           // String sql = "update users set sex='"+sex+"',set years="+age+",set location='"+location+"' where username = '" + username + "'";
             st.executeUpdate(sql);
             conn.close();
             st.close();
