@@ -9,13 +9,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <EditText
-        android:id="@+id/add_data"
-        android:layout_marginLeft="60dp"
-        android:hint="请输入内容"
+    <com.classichu.lineseditview.LinesEditView
+        android:id="@+id/add_text"
+        android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
+        android:layout_height="wrap_content"
+        />
     <Button
         android:id="@+id/add_create"
         android:layout_gravity="right"
@@ -25,9 +24,12 @@
 
     <Button
         android:id="@+id/choose_from_album"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Take photo from album"/>
+        android:text="点击上传图片"
+        android:layout_gravity="right"/>
+
+
 
     <ImageView
         android:id="@+id/picture"
