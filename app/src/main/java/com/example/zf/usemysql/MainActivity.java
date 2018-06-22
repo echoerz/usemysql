@@ -19,14 +19,14 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+
 import com.example.zf.usemysql.login.BaseActivity;
+import com.example.zf.usemysql.my_love.mylove;
 import com.example.zf.usemysql.myroom.MainZhuYe;
+import com.example.zf.usemysql.my_updata.myupdata;
 import com.example.zf.usemysql.tools.DBUtils;
 import com.example.zf.usemysql.tools.love;
 
@@ -34,8 +34,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.HashMap;
-import static com.example.zf.usemysql.tools.DBUtils.LastID;
 
 public class MainActivity extends BaseActivity {
 

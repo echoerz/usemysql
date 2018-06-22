@@ -1,13 +1,14 @@
-package com.example.zf.usemysql;
+package com.example.zf.usemysql.my_updata;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.zf.usemysql.R;
 
 import java.util.List;
 
@@ -30,6 +31,7 @@ public class ContextAdapter extends ArrayAdapter {
         TextView words = (TextView) view.findViewById(R.id.words_item);//获取该布局内的文本视图
         //Picture.setImageResource(updatas.getImageId());//为图片视图设置图片资源
         words.setText(updatas.ShowInUpdata());//为文本视图设置文本内容
+        Picture.setImageBitmap(updatas.getBitmap());
         return view;
     }
 }

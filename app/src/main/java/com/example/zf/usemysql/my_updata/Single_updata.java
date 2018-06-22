@@ -1,4 +1,4 @@
-package com.example.zf.usemysql;
+package com.example.zf.usemysql.my_updata;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -8,6 +8,8 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.zf.usemysql.R;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;

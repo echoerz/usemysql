@@ -5,9 +5,8 @@
     android:id="@+id/updata_item">
     <ImageView
         android:id="@+id/picture_item"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/logo1"/>
+        android:layout_width="80dp"
+        android:layout_height="80dp" />
 
     <TextView
         android:id="@+id/words_item"

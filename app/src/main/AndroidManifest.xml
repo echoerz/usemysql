@@ -44,10 +44,10 @@
 
         <activity android:name=".myroom.MainZhuYe" />
         <activity android:name=".myroom.changedata" />
-        <activity android:name=".myupdata"></activity>
-        <activity android:name=".mylove"></activity>
-        <activity android:name=".Single_updata"></activity>
-        <activity android:name=".Single_love"></activity>
+        <activity android:name=".my_updata.myupdata"></activity>
+        <activity android:name=".my_love.mylove"></activity>
+        <activity android:name=".my_updata.Single_updata"></activity>
+        <activity android:name=".my_love.Single_love"></activity>
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.example.zf.usemysql;
+package com.example.zf.usemysql.my_love;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.zf.usemysql.R;
+import com.example.zf.usemysql.my_love.Love_item;
 
 import java.util.List;
 
@@ -29,6 +32,7 @@ public class LoveAdapter extends ArrayAdapter {
         TextView words = (TextView) view.findViewById(R.id.love_words_item);//获取该布局内的文本视图
         //Picture.setImageResource(updatas.getImageId());//为图片视图设置图片资源
         words.setText(loves.ShowInLove());//为文本视图设置文本内容
+        Picture.setImageBitmap(loves.getBitmap());
         return view;
     }
 }

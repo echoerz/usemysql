@@ -1,4 +1,4 @@
-package com.example.zf.usemysql;
+package com.example.zf.usemysql.my_love;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.zf.usemysql.R;
 import com.example.zf.usemysql.tools.DBUtils;
 import com.example.zf.usemysql.tools.love;
 
