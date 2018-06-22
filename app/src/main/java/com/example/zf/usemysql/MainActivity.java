@@ -62,8 +62,16 @@ public class MainActivity extends BaseActivity {
             ((TextView) findViewById(R.id.main_context)).setText(textfen[2]);
             ((TextView) findViewById(R.id.main_zan)).setText("点赞数："+textfen[4]);
             userid= Integer.parseInt(textfen[3]);
+            if(textfen[5].equals("2")) {
+                Bitmap bitmap = convertStringToIcon(textfen[6]);
+                ((ImageView) findViewById(R.id.main_picture)).setImageBitmap(bitmap);
+            }
+            else {
+                Bitmap bitmap = null;
+                ((ImageView) findViewById(R.id.main_picture)).setImageBitmap(bitmap);
+            }
+
             checkpic=textfen[4];
-            Bitmap bitmap=convertStringToIcon(textfen[6]);
            //0-3数据   4图片
             ((ImageView) findViewById(R.id.show_pic)).setImageBitmap(bitmap);
 
