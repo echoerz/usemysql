@@ -61,9 +61,9 @@ public class MainActivity extends BaseActivity {
             ((TextView) findViewById(R.id.main_context)).setText(textfen[2]);
             ((TextView) findViewById(R.id.main_zan)).setText("点赞数："+textfen[4]);
             userid= Integer.parseInt(textfen[3]);
-            Bitmap bitmap=convertStringToIcon(textfen[5]);
+            Bitmap bitmap=convertStringToIcon(textfen[6]);
            //0-3数据   4图片
-            //((ImageView) findViewById(R.id.show_pic)).setImageBitmap(bitmap);
+            ((ImageView) findViewById(R.id.show_pic)).setImageBitmap(bitmap);
 
             String str = "查询不存在";
             if (message.what == 1){
@@ -78,7 +78,6 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);

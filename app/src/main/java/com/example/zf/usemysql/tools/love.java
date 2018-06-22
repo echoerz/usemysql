@@ -97,10 +97,17 @@ public class love {
                 return null;
             } else {
                 while (res.next()) {
-                    ss = ss+res.getString("username") + "cccc\n"
-                            + res.getString("title") + "cccc\n"
-                            + res.getString("context") + "cccc\n"
-                            + res.getInt("zan");
+                    if(ss == null) {
+                        ss =  res.getString("username") + "cccc\n"
+                                + res.getString("title") + "cccc\n"
+                                + res.getString("context") + "cccc\n"
+                                + res.getInt("zan");
+                    }else{
+                        ss = ss + res.getString("username") + "cccc\n"
+                                + res.getString("title") + "cccc\n"
+                                + res.getString("context") + "cccc\n"
+                                + res.getInt("zan");
+                    }
                 }
                 conn.close();
                 st.close();

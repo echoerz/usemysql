@@ -84,7 +84,7 @@ public class DBUtils {
 
     public static String findupdata(String username) {
         Connection conn = getConnection("test");
-        String ss= null;
+        String ss = null;
         try {
             Statement st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             String sql = "select title,context,zan from framgment where username = '"+username+"'";
@@ -93,9 +93,15 @@ public class DBUtils {
                 return null;
             } else {
                 while (res.next()) {
-                    ss = ss + res.getString("title") + "cccc\n"
-                            + res.getString("context") + "cccc\n"
-                            + res.getInt("zan") + "ddd\n";
+                    if(ss == null) {
+                        ss = res.getString("title") + "cccc\n"
+                                + res.getString("context") + "cccc\n"
+                                + res.getInt("zan") + "ddd\n";
+                    }
+                    else
+                        ss = ss + res.getString("title") + "cccc\n"
+                                + res.getString("context") + "cccc\n"
+                                + res.getInt("zan") + "ddd\n";
                 }
                 conn.close();
                 st.close();
@@ -182,7 +188,7 @@ public class DBUtils {
         try {
             Statement st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             //String sql = "create table tb_emp1(id  INT(11))";
-            String sql = "select username,title,context,zan,id from framgment limit  " + name + ",1";
+            String sql = "select username,title,context,zan,id,piccheck from framgment limit  " + name + ",1";
             ResultSet res = st.executeQuery(sql);
             if (res == null) {
                 return null;
@@ -192,7 +198,8 @@ public class DBUtils {
                             + res.getString("title") + "aaaa\n"
                             + res.getString("context") + "aaaa\n"
                             + res.getInt("id") + "aaaa\n"
-                            + res.getInt("zan")+ "aaaa\n";
+                            + res.getInt("zan")+ "aaaa\n"
+                            + res.getInt("piccheck")+ "aaaa\n";
                 }
                 conn.close();
                 st.close();
