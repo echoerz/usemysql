@@ -51,6 +51,7 @@ public class MainActivity extends BaseActivity {
     private static final String TAG = "MainActivity";
     private static String user;
     private static int userid;
+    private static String checkpic;
     Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message message) {
@@ -61,6 +62,7 @@ public class MainActivity extends BaseActivity {
             ((TextView) findViewById(R.id.main_context)).setText(textfen[2]);
             ((TextView) findViewById(R.id.main_zan)).setText("点赞数："+textfen[4]);
             userid= Integer.parseInt(textfen[3]);
+            checkpic=textfen[4];
             Bitmap bitmap=convertStringToIcon(textfen[6]);
            //0-3数据   4图片
             ((ImageView) findViewById(R.id.show_pic)).setImageBitmap(bitmap);
@@ -101,7 +103,10 @@ public class MainActivity extends BaseActivity {
                         //Message message = Message.obtain();
                         Message msg = new Message();
                         try {
-                            URL url = new URL("http://123.207.151.226:8080/pic/45.jpg");
+                            String idpic;
+                            if(checkpic.equals("2")){idpic= String.valueOf(userid);}
+                            else {idpic="45";}
+                            URL url = new URL("http://123.207.151.226:8080/pic/"+idpic+".jpg");
                             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                             //这里就简单的设置了网络的读取和连接时间上线，如果时间到了还没成功，那就不再尝试
                             httpURLConnection.setReadTimeout(8000);
