@@ -90,7 +90,7 @@ public class DBUtils {
         String ss = null;
         try {
             Statement st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            String sql = "select title,context,zan from framgment where username = '"+username+"'";
+            String sql = "select title,context,zan,piccheck from framgment where username = '"+username+"'";
             ResultSet res = st.executeQuery(sql);
             if (res == null) {
                 return null;
@@ -99,12 +99,14 @@ public class DBUtils {
                     if(ss == null) {
                         ss = res.getString("title") + "cccc\n"
                                 + res.getString("context") + "cccc\n"
-                                + res.getInt("zan") + "ddd\n";
+                                + res.getInt("zan")+ "cccc\n"
+                                + res.getInt("piccheck")+ "ddd\n";
                     }
                     else
                         ss = ss + res.getString("title") + "cccc\n"
                                 + res.getString("context") + "cccc\n"
-                                + res.getInt("zan") + "ddd\n";
+                                + res.getInt("zan")+ "cccc\n"
+                                + res.getInt("piccheck")+ "ddd\n";
                 }
                 conn.close();
                 st.close();

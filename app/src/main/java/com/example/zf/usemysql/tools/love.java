@@ -72,7 +72,10 @@ public class love {
             } else {
                 while (res.next()) {
                     id = res.getInt("love");
-                    ss = ss+love.findlove(id) + "ddd\n";
+                    if(ss == null){
+                        ss = love.findlove(id) + "ddd\n";
+                    }else{
+                    ss = ss+love.findlove(id) + "ddd\n";}
                 }
                 conn.close();
                 st.close();
@@ -91,7 +94,7 @@ public class love {
         String ss= null;
         try {
             Statement st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            String sql = "select username,title,context,zan from framgment where id= "+id;
+            String sql = "select username,title,context,zan,id,piccheck from framgment where id= "+id;
             ResultSet res = st.executeQuery(sql);
             if (res == null) {
                 return null;
@@ -101,12 +104,16 @@ public class love {
                         ss =  res.getString("username") + "cccc\n"
                                 + res.getString("title") + "cccc\n"
                                 + res.getString("context") + "cccc\n"
-                                + res.getInt("zan");
+                                + res.getInt("zan")+ "cccc\n"
+                                + res.getInt("id") + "cccc\n"
+                                + res.getInt("piccheck");
                     }else{
                         ss = ss + res.getString("username") + "cccc\n"
                                 + res.getString("title") + "cccc\n"
                                 + res.getString("context") + "cccc\n"
-                                + res.getInt("zan");
+                                + res.getInt("zan")+ "cccc\n"
+                                + res.getInt("id") + "cccc\n"
+                                + res.getInt("piccheck");
                     }
                 }
                 conn.close();
