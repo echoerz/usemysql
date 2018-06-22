@@ -10,7 +10,7 @@
         android:textSize="20sp"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="10dp"
-        android:id="@+id/single_title"/>
+        android:id="@+id/love_single_title"/>
 
     <ImageView
         android:layout_width="wrap_content"
@@ -18,7 +18,15 @@
         android:src="@mipmap/logo1"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:id="@+id/single_picture"/>
+        android:id="@+id/love_single_picture"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:id="@+id/love_single_username"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -27,7 +35,7 @@
         android:layout_marginTop="25dp"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
-        android:id="@+id/single_context"/>
+        android:id="@+id/love_single_context"/>
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -41,11 +49,9 @@
             android:layout_marginRight="25dp"
             android:layout_marginBottom="25dp"
             android:textSize="14sp"
-            android:id="@+id/single_zan"/>
+            android:id="@+id/love_single_zan"/>
 
     </RelativeLayout>
-
-
 
 
 </LinearLayout>

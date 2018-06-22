@@ -56,11 +56,15 @@ public class MainActivity extends BaseActivity {
         public boolean handleMessage(Message message) {
             String text = (String) message.obj;
             String textfen[] = text.split("aaaa\n");
+            ((TextView) findViewById(R.id.main_username)).setText(textfen[0]);
+            ((TextView) findViewById(R.id.main_title)).setText(textfen[1]);
+            ((TextView) findViewById(R.id.main_context)).setText(textfen[2]);
+            ((TextView) findViewById(R.id.main_zan)).setText("点赞数："+textfen[4]);
             userid= Integer.parseInt(textfen[3]);
             Bitmap bitmap=convertStringToIcon(textfen[5]);
            //0-3数据   4图片
             //((ImageView) findViewById(R.id.show_pic)).setImageBitmap(bitmap);
-            ((TextView) findViewById(R.id.tv_result)).setText(textfen[0]+"\n"+textfen[1]+"\n"+textfen[2]+"\n"+textfen[3]+"\n"+textfen[4]+"\n");
+
             String str = "查询不存在";
             if (message.what == 1){
                 str = "查询成功";
@@ -94,39 +98,27 @@ public class MainActivity extends BaseActivity {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        TextView tv_result = findViewById(R.id.tv_result);
-                        HashMap<String, String> mp =
-                                DBUtils.ChackID();
-                        Message message = Message.obtain();
-                       // Message msg = new Message();
-                        if (mp == null) {
-                            message.what = 0;
-                           // msg.obj = "查询失败，请检查网络是否连接成功";
-                            //非UI线程不要试着去操作界面
-                        } else {
-                            String ss = new String();
-                            for (String key : mp.keySet()) {
-                                ss = ss +mp.get(key) + "aaaa\n";
-                            }
-                            try {
-                                URL url = new URL("http://123.207.151.226:8080/pic/45.jpg");
-                                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                                //这里就简单的设置了网络的读取和连接时间上线，如果时间到了还没成功，那就不再尝试
-                                httpURLConnection.setReadTimeout(8000);
-                                httpURLConnection.setConnectTimeout(8000);
-                                InputStream inputStream = httpURLConnection.getInputStream();
-                                //这里直接就用bitmap取出了这个流里面的图片，哈哈，其实整篇文章不就主要是这一句嘛
-                                Bitmap bm = BitmapFactory.decodeStream(inputStream);
-                                //下面这是把图片携带在Message里面，简单，不多说
-                                ss = ss+convertIconToString(bm) + "aaaa\n";
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            message.what = 1;
-                            message.obj = ss;
-                            handler.sendMessage(message);
-                           }
+                        String data = DBUtils.ChackID();
+                        //Message message = Message.obtain();
+                        Message msg = new Message();
+                        try {
+                            URL url = new URL("http://123.207.151.226:8080/pic/45.jpg");
+                            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                            //这里就简单的设置了网络的读取和连接时间上线，如果时间到了还没成功，那就不再尝试
+                            httpURLConnection.setReadTimeout(8000);
+                            httpURLConnection.setConnectTimeout(8000);
+                            InputStream inputStream = httpURLConnection.getInputStream();
+                            //这里直接就用bitmap取出了这个流里面的图片，哈哈，其实整篇文章不就主要是这一句嘛
+                            Bitmap bm = BitmapFactory.decodeStream(inputStream);
+                            //下面这是把图片携带在Message里面，简单，不多说
+                            data = data+convertIconToString(bm) + "aaaa\n";
 
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        msg.what = 1;
+                        msg.obj=data;
+                        handler.sendMessage(msg);
                     }
                 }).start();
             }

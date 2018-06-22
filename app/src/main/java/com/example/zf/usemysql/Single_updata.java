@@ -18,10 +18,12 @@ public class Single_updata extends AppCompatActivity {
         String fen[] = single_updata.split("cccc\n");
         TextView context = findViewById(R.id.single_context);
         TextView title = findViewById(R.id.single_title);
+        TextView zan = findViewById(R.id.single_zan);
         ImageView picture = findViewById(R.id.single_picture);
 
         title.setText(fen[0]);
         context.setText(fen[1]);
+        zan.setText("点赞数："+fen[2]);
 
     }
 }

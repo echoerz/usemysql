@@ -44,6 +44,8 @@
         <activity android:name=".myroom.changedata" />
         <activity android:name=".myupdata"></activity>
         <activity android:name=".mylove"></activity>
+        <activity android:name=".Single_updata"></activity>
+        <activity android:name=".Single_love"></activity>
     </application>
 
 </manifest>

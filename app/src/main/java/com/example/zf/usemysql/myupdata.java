@@ -35,17 +35,16 @@ public class myupdata extends AppCompatActivity {
         @Override
         public boolean handleMessage(Message message) {
             String text = (String) message.obj;
-
             textfen1 = text.split("ddd\n");
-            Updata updata[] = new Updata[10];
             int length = textfen1.length;
+            Updata updata[] = new Updata[length];
             for(int i=0;i<length;i++) {
                 Updata data = new Updata("", "",0);
                 String textfen2[] = textfen1[i].split("cccc\n");
                 data.title = textfen2[0];
                 data.context = textfen2[1];
-                if(data.context.length()>150)
-                    data.context = data.context.substring(0,150)+"......";
+                if(data.context.length()>30)
+                    data.context = data.context.substring(0,30)+"......";
                 data.zan = Integer.parseInt((textfen2[2]))-48;
                 updata[i] = data;
                 data = null;
@@ -68,21 +67,6 @@ public class myupdata extends AppCompatActivity {
                 }
 
             });
-            /*LinearLayout layout = findViewById(R.id.updata_item);
-
-            updataList[].setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(myupdata.this, addcontext.class);
-                    startActivity(intent);
-                }
-            });*/
-
-            //Bitmap bitmap=MainActivity.convertStringToIcon(textfen[4]);
-            //0标题 1文字 2点赞数
-            /*String data = (String)message.obj;
-            TextView show_myupdata = (TextView)findViewById(R.id.context_card);
-            show_myupdata.setText(data);*/
             return false;
         }
     });

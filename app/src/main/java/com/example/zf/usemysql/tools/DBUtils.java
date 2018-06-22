@@ -167,7 +167,7 @@ public class DBUtils {
 */
 
 
-    public static HashMap<String, String> ChackID() {
+    public static String ChackID() {
         HashMap<String, String> map = new HashMap<>();
         int a= findhangshu();
         //int a= Integer.parseInt((String)"2");
@@ -175,7 +175,7 @@ public class DBUtils {
         int name=random.nextInt(a) + 1;
         LastID=name;
         Connection conn = getConnection("test");
-
+        String ss= null;
         try {
             Statement st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             //String sql = "create table tb_emp1(id  INT(11))";
@@ -184,22 +184,17 @@ public class DBUtils {
             if (res == null) {
                 return null;
             } else {
-                int cnt = res.getMetaData().getColumnCount();
-                res.last();
-                //int count = res.getRow();
-                res.beforeFirst();
-                //res.last(); int rowCnt = res.getRow(); res.first();
-                res.next();
-                for (int i = 1; i <= cnt; ++i) {
-                   // if (i==1){LastID = res.getInt("id");}
-                    String field = res.getMetaData().getColumnLabel(i);
-                    map.put(field, res.getString(field));
-                    //Log.d("DBUtils","aaaa:"+res.getString(field));
+                while (res.next()) {
+                    ss = ss+res.getString("username") + "aaaa\n"
+                            + res.getString("title") + "aaaa\n"
+                            + res.getString("context") + "aaaa\n"
+                            + res.getInt("id") + "aaaa\n"
+                            + res.getInt("zan")+ "aaaa\n";
                 }
                 conn.close();
                 st.close();
                 res.close();
-                return map;
+                return ss;
             }
         } catch (Exception e) {
             e.printStackTrace();
