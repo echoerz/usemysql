@@ -72,7 +72,10 @@ public class love {
             } else {
                 while (res.next()) {
                     id = res.getInt("love");
-                    ss = ss+love.findlove(id) + "ddd\n";
+                    if(ss == null){
+                        ss = love.findlove(id) + "ddd\n";
+                    }else{
+                    ss = ss+love.findlove(id) + "ddd\n";}
                 }
                 conn.close();
                 st.close();
