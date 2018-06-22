@@ -36,6 +36,8 @@ public class DBUtils {
 
     public static int LastID;
     public static int cnt=0;
+    public static int nowid=0;
+
     private static Connection getConnection(String dbName) {
         Connection conn = null;
         try {
@@ -200,6 +202,7 @@ public class DBUtils {
                             + res.getInt("id") + "aaaa\n"
                             + res.getInt("zan")+ "aaaa\n"
                             + res.getInt("piccheck")+ "aaaa\n";
+                    nowid=res.getInt("id");
                 }
                 conn.close();
                 st.close();
