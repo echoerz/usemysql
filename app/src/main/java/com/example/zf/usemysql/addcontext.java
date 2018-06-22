@@ -42,6 +42,7 @@ public class addcontext extends BaseActivity {
     private static final String TAG = "addcontext";
     public byte[] picadd = new byte[1024];
     private SharedPreferences pref2;
+    public static int shifoupic=0;
     Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message message) {
@@ -85,7 +86,12 @@ public class addcontext extends BaseActivity {
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            DBUtils.AddData(title,context,user,imagePath1);
+                            if (addcontext.shifoupic==1) {
+                                DBUtils.AddDatawithpic(title, context, user, imagePath1);
+                                addcontext.shifoupic=0;
+                            }
+                            else {DBUtils.AddDatanopic(title, context, user);
+                                addcontext.shifoupic=0;}
                             //DBUtils.AddPicture();
                             Message msg = new Message();
                           //  msg.what = 0;
@@ -105,6 +111,7 @@ public class addcontext extends BaseActivity {
         chooseFromAlbum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                addcontext.shifoupic=1;
                 if (ContextCompat.checkSelfPermission(addcontext.this,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager
                         .PERMISSION_GRANTED){

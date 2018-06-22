@@ -131,23 +131,6 @@ public class MainActivity extends BaseActivity {
             // }
         });
 
-        (findViewById(R.id.show_pic)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        love.Addlove(userid,user);
-                    }
-                }).start();
-                Toast.makeText(MainActivity.this,"已收藏",Toast.LENGTH_SHORT).show();
-            }
-            // }
-        });
-
-
-
-
 
         android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -197,6 +180,15 @@ public class MainActivity extends BaseActivity {
             case R.id.add_biao:
                 Intent intent = new Intent(MainActivity.this, addcontext.class);
                 startActivity(intent);
+                break;
+            case R.id.show_pic:
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        love.Addlove(userid,user);
+                    }
+                }).start();
+                Toast.makeText(MainActivity.this,"已收藏",Toast.LENGTH_SHORT).show();
                 break;
             default:break;
         }
