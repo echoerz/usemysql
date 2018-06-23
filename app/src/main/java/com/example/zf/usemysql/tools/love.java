@@ -57,7 +57,34 @@ public class love {
         return null;
     }
 
-
+    public static String findloveids(String username) {
+        Connection conn = getConnection("test");
+        String ss= null;
+        try {
+            Statement st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            String sql = "select * from "+username;
+            ResultSet res = st.executeQuery(sql);
+            if (res == null) {
+                return null;
+            } else {
+                while (res.next()) {
+                    if(ss == null){
+                        ss = res.getInt("love") + "cccc\n";
+                    }else {
+                        ss = ss + res.getInt("love") + "cccc\n";
+                    }
+                }
+                conn.close();
+                st.close();
+                res.close();
+                return ss;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.d(TAG, " 数据操作异常");
+            return null;
+        }
+    }
 
     public static String findlovezong(String username) {
         Connection conn = getConnection("test");

@@ -49,6 +49,7 @@ public class MainActivity extends BaseActivity {
     private static final String TAG = "MainActivity";
     private static String user;
     private static int userid;
+    private static int check;
     Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message message) {
@@ -148,7 +149,7 @@ public class MainActivity extends BaseActivity {
                         startActivity(intent1);
                         break;
                     case R.id.nav_myshoucang:
-                        Intent intent2 = new Intent(MainActivity.this,mylove.class);
+                        Intent intent2 = new Intent(MainActivity.this, mylove.class);
                         startActivity(intent2);
                         break;
                     case R.id.nav_myroom:
@@ -183,10 +184,29 @@ public class MainActivity extends BaseActivity {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        love.Addlove(userid,user);
+                        String ids = love.findloveids(user);
+                        //System.out.print(ids);
+                        String idfen[] = ids.split("cccc\n");
+                        int length = idfen.length;
+                        for(int i = 0;i<length;i++)
+                        {
+                            if(DBUtils.nowid == Integer.parseInt(idfen[i])){
+                                check = 1;
+                                break;
+                            }
+                        }
+                        if(check == 0) {
+                            love.Addlove(userid, user);
+                        }
+
                     }
                 }).start();
-                Toast.makeText(MainActivity.this,"已收藏",Toast.LENGTH_SHORT).show();
+                if(check == 0){
+                    Toast.makeText(MainActivity.this,"已收藏",Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(MainActivity.this,"已收藏，请勿重复收藏",Toast.LENGTH_SHORT).show();
+                }
                 break;
             default:break;
         }
