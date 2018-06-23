@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.zf.usemysql.R;
 import com.example.zf.usemysql.tools.love;
@@ -32,23 +34,29 @@ public class mylove extends AppCompatActivity {
         @Override
         public boolean handleMessage(Message message) {
 
+            if(message.what==1) {
+                LoveAdapter adapter = new LoveAdapter(mylove.this, R.layout.mylove_item, LoveList);
+                ListView listView = findViewById(R.id.love_list_view);
+                listView.setAdapter(adapter);
 
-            LoveAdapter adapter = new LoveAdapter(mylove.this, R.layout.mylove_item,LoveList);
-            ListView listView = findViewById(R.id.love_list_view);
-            listView.setAdapter(adapter);
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapter, View view, int position,
+                                            long id) {
+                        Intent intent = new Intent(mylove.this, Single_love.class);
+                        intent.putExtra("item", textfen[position]);
+                        startActivity(intent);
 
-                @Override
-                public void onItemClick(AdapterView<?> adapter, View view, int position,
-                                        long id) {
-                    Intent intent = new Intent(mylove.this, Single_love.class);
-                    intent.putExtra("item", textfen[position]);
-                    startActivity(intent);
+                    }
 
-                }
-
-            });
+                });
+            }
+            else{
+                setContentView(R.layout.showtips);
+                TextView view = findViewById(R.id.tips_text);
+                view.setText("还没有任何收藏哦");
+            }
             return false;
         }
     });
@@ -67,39 +75,44 @@ public class mylove extends AppCompatActivity {
             public void run() {
                 String text = love.findlovezong(user);
                 Message msg = new Message();
-                msg.what = 1;
-                //非UI线程不要试着去操作界面
-                textfen = text.split("ddd\n");
-                int length = textfen.length;
-                Love_item loves[] = new Love_item[length];
-                for(int i=0;i<length;i++) {
-                    Love_item data = new Love_item("", "",0,"",0,null);
-                    String textfen2[] = textfen[i].split("cccc\n");
-                    data.user = textfen2[0];
-                    data.title = textfen2[1];
-                    data.context = textfen2[2];
-                    if(data.context.length()>30)
-                        data.context = data.context.substring(0,30)+"......";
-                    data.zan = Integer.parseInt((textfen2[3]));
-                    data.picid = Integer.parseInt((textfen2[4]));
-                    int check = Integer.parseInt((textfen2[5]));
-                    if(check == 2) {
-                        try {
-                            URL url = new URL("http://123.207.151.226:8080/pic/" + textfen2[4] + ".jpg");
-                            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                            //这里就简单的设置了网络的读取和连接时间上线，如果时间到了还没成功，那就不再尝试
-                            httpURLConnection.setReadTimeout(8000);
-                            httpURLConnection.setConnectTimeout(8000);
-                            InputStream inputStream = httpURLConnection.getInputStream();
-                            //这里直接就用bitmap取出了这个流里面的图片，哈哈，其实整篇文章不就主要是这一句嘛
-                            bm = BitmapFactory.decodeStream(inputStream);
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                if(text != null) {
+                    msg.what = 1;
+                    //非UI线程不要试着去操作界面
+                    textfen = text.split("ddd\n");
+                    int length = textfen.length;
+                    Love_item loves[] = new Love_item[length];
+                    for (int i = 0; i < length; i++) {
+                        Love_item data = new Love_item("", "", 0, "", 0, null);
+                        String textfen2[] = textfen[i].split("cccc\n");
+                        data.user = textfen2[0];
+                        data.title = textfen2[1];
+                        data.context = textfen2[2];
+                        if (data.context.length() > 30)
+                            data.context = data.context.substring(0, 30) + "......";
+                        data.zan = Integer.parseInt((textfen2[3]));
+                        data.picid = Integer.parseInt((textfen2[4]));
+                        int check = Integer.parseInt((textfen2[5]));
+                        if (check == 2) {
+                            try {
+                                URL url = new URL("http://123.207.151.226:8080/pic/" + textfen2[4] + ".jpg");
+                                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                                //这里就简单的设置了网络的读取和连接时间上线，如果时间到了还没成功，那就不再尝试
+                                httpURLConnection.setReadTimeout(8000);
+                                httpURLConnection.setConnectTimeout(8000);
+                                InputStream inputStream = httpURLConnection.getInputStream();
+                                //这里直接就用bitmap取出了这个流里面的图片，哈哈，其实整篇文章不就主要是这一句嘛
+                                bm = BitmapFactory.decodeStream(inputStream);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            data.bitmap = bm;
                         }
-                        data.bitmap = bm;
+                        loves[i] = data;
+                        LoveList.add(loves[i]);
                     }
-                    loves[i] = data;
-                    LoveList.add(loves[i]);
+                }
+                else{
+                    msg.what = 2;
                 }
                 handler.sendMessage(msg);
             }

@@ -49,7 +49,8 @@ public class MainActivity extends BaseActivity {
     private static final String TAG = "MainActivity";
     private static String user;
     private static int userid;
-    private static int check;
+    private static int check_love;
+    private static int checknew_love;
     Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message message) {
@@ -185,23 +186,25 @@ public class MainActivity extends BaseActivity {
                     @Override
                     public void run() {
                         String ids = love.findloveids(user);
-                        //System.out.print(ids);
-                        String idfen[] = ids.split("cccc\n");
-                        int length = idfen.length;
-                        for(int i = 0;i<length;i++)
-                        {
-                            if(DBUtils.nowid == Integer.parseInt(idfen[i])){
-                                check = 1;
-                                break;
+                        if(ids!=null) {
+                            String idfen[] = ids.split("cccc\n");
+                            int length = idfen.length;
+                            for (int i = 0; i < length; i++) {
+                                if (DBUtils.nowid == Integer.parseInt(idfen[i])) {
+                                    check_love = 1;
+                                    break;
+                                }
+                            }
+                            if (check_love == 0) {
+                                love.Addlove(userid, user);
                             }
                         }
-                        if(check == 0) {
+                        else{
                             love.Addlove(userid, user);
                         }
-
                     }
                 }).start();
-                if(check == 0){
+                if(check_love == 0){
                     Toast.makeText(MainActivity.this,"已收藏",Toast.LENGTH_SHORT).show();
                 }
                 else{
