@@ -164,7 +164,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,fullpic.class);
-                intent.putExtra("id",String.valueOf(userid));
+                intent.putExtra("id","main");
                 startActivity(intent);
             }
         });

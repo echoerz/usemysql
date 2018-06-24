@@ -14,7 +14,6 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:keepScreenOn="true"
-        android:src="@mipmap/touxiang"
         android:textColor="#33b5e5"
         android:textSize="50sp"
         android:textStyle="bold" />

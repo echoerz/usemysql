@@ -27,7 +27,7 @@ public class Single_updata extends AppCompatActivity {
     private int check;
     private String id;
     private ImageView picture;
-    private Bitmap bm = null;
+    public static Bitmap bm = null;
 
 
     Handler handler = new Handler(new Handler.Callback() {
@@ -81,7 +81,7 @@ public class Single_updata extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Single_updata.this,fullpic.class);
-                intent.putExtra("id",id);
+                intent.putExtra("id","updata");
                 startActivity(intent);
             }
         });

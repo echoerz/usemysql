@@ -3,8 +3,6 @@ package com.example.zf.usemysql;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Message;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,9 +11,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import com.example.zf.usemysql.my_love.Single_love;
+import com.example.zf.usemysql.my_updata.Single_updata;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -91,15 +88,6 @@ public class fullpic extends AppCompatActivity {
             return false;
         }
     };
-    private Bitmap bm = null;
-    ImageView a;
-    Handler handler = new Handler(new Handler.Callback() {
-        @Override
-        public boolean handleMessage(Message message) {
-            a.setImageBitmap(bm);
-            return false;
-        }
-    });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,31 +98,16 @@ public class fullpic extends AppCompatActivity {
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
         mContentView = findViewById(R.id.fullscreen_content);
-        a= (ImageView)findViewById(R.id.fullscreen_content) ;
+        ImageView a = (ImageView)findViewById(R.id.fullscreen_content) ;
         Intent intent =getIntent();
-        final String idpic=intent.getStringExtra("id");
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                    try {
-                        URL url = new URL("http://123.207.151.226:8080/pic/"+idpic+".jpg");
-                        HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                        //这里就简单的设置了网络的读取和连接时间上线，如果时间到了还没成功，那就不再尝试
-                        httpURLConnection.setReadTimeout(8000);
-                        httpURLConnection.setConnectTimeout(8000);
-                        InputStream inputStream = httpURLConnection.getInputStream();
-                        //这里直接就用bitmap取出了这个流里面的图片，哈哈，其实整篇文章不就主要是这一句嘛
-                        bm = BitmapFactory.decodeStream(inputStream);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    Message msg = new Message();
-                    msg.what = 1;
-                    //非UI线程不要试着去操作界面
-                handler.sendMessage(msg);
-            }
-        }).start();
-        //Bitmap bitmap=MainActivity.convertStringToIcon(MainActivity.bitmapString);
+        String idpic=intent.getStringExtra("id");
+        if (idpic.equals("main")){
+        Bitmap bitmap=MainActivity.convertStringToIcon(MainActivity.bitmapString);
+        a.setImageBitmap(bitmap);}
+        if(idpic.equals("updata")){
+            a.setImageBitmap(Single_updata.bm);}
+        if(idpic.equals("love")){
+            a.setImageBitmap(Single_love.bm);}
 
         // Set up the user interaction to manually show or hide the system UI.
         mContentView.setOnClickListener(new View.OnClickListener() {

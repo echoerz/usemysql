@@ -31,7 +31,7 @@ public class Single_love extends AppCompatActivity {
     private int check;
     private String id;
     private ImageView picture;
-    private Bitmap bm = null;
+    public static Bitmap bm = null;
 
     Handler handler = new Handler(new Handler.Callback() {
         @Override
@@ -88,7 +88,7 @@ public class Single_love extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(Single_love.this,fullpic.class);
-            intent.putExtra("id",id);
+            intent.putExtra("id","love");
             startActivity(intent);
         }
     });
