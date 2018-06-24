@@ -21,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,6 +58,8 @@ public class MainActivity extends BaseActivity {
     private static int checknew_love;
     private int zan_biaozhi=0;
     public static String bitmapString=null;
+    private ProgressBar progressBar;
+
     Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message message) {
@@ -78,7 +81,7 @@ public class MainActivity extends BaseActivity {
                 ((ImageView) findViewById(R.id.main_picture)).setImageBitmap(bitmap);
             }
            //0-3数据   4图片
-
+            progressBar.setVisibility(View.GONE);
             String str = "查询不存在";
             if (message.what == 1){
                 str = "查询成功";
@@ -97,6 +100,7 @@ public class MainActivity extends BaseActivity {
         View headerView = navigationView.getHeaderView(0);
         touxiang_name= (TextView) headerView.findViewById(R.id.touxiang_name);  //获取用户名
         use_touxiang = (ImageView)headerView.findViewById(R.id.use_touxiang);  //获取用户头像
+        progressBar=(ProgressBar)findViewById(R.id.jiazai);
 
 
         final LikeView lv = (LikeView) findViewById(R.id.lv);
@@ -172,6 +176,7 @@ public class MainActivity extends BaseActivity {
         (findViewById(R.id.btn_01)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressBar.setVisibility(View.VISIBLE);
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
