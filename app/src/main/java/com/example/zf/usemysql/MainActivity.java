@@ -101,7 +101,7 @@ public class MainActivity extends BaseActivity {
         lv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (zan_biaozhi==0) {
+                if (lv.isChecked()==true) {
                     ((TextView) findViewById(R.id.main_zan)).setText(String.valueOf(userzan + 1));
                     new Thread(new Runnable() {
                         @Override
@@ -165,6 +165,7 @@ public class MainActivity extends BaseActivity {
                     @Override
                     public void run() {
                         String data = DBUtils.ChackID();
+                        zan_biaozhi=0;
                         //Message message = Message.obtain();
                         Message msg = new Message();
                         try {
