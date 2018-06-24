@@ -56,6 +56,7 @@ public class MainActivity extends BaseActivity {
     private static int check_love;
     private static int checknew_love;
     private int zan_biaozhi=0;
+    public static String bitmapString=null;
     Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message message) {
@@ -68,7 +69,8 @@ public class MainActivity extends BaseActivity {
             userid= Integer.parseInt(textfen[3]);
             userzan= Integer.parseInt(textfen[4]);
             if(textfen[5].equals("2")) {
-                Bitmap bitmap = convertStringToIcon(textfen[6]);
+                bitmapString= textfen[6];
+               Bitmap bitmap = convertStringToIcon(textfen[6]);
                 ((ImageView) findViewById(R.id.main_picture)).setImageBitmap(bitmap);
             }
             else {
@@ -157,7 +159,16 @@ public class MainActivity extends BaseActivity {
                 handler.sendMessage(msg);
             }
         }).start();
-        
+
+        (findViewById(R.id.main_picture)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,fullpic.class);
+                intent.putExtra("id",String.valueOf(userid));
+                startActivity(intent);
+            }
+        });
+
         (findViewById(R.id.btn_01)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

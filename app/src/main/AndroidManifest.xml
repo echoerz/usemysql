@@ -12,13 +12,13 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        tools:replace="android:label"
         android:allowBackup="true"
         android:icon="@mipmap/logo2"
         android:label="书签"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="android:label">
         <activity android:name=".login.logintest">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -44,10 +44,15 @@
 
         <activity android:name=".myroom.MainZhuYe" />
         <activity android:name=".myroom.changedata" />
-        <activity android:name=".my_updata.myupdata"></activity>
-        <activity android:name=".my_love.mylove"></activity>
-        <activity android:name=".my_updata.Single_updata"></activity>
-        <activity android:name=".my_love.Single_love"></activity>
+        <activity android:name=".my_updata.myupdata" />
+        <activity android:name=".my_love.mylove" />
+        <activity android:name=".my_updata.Single_updata" />
+        <activity android:name=".my_love.Single_love" />
+        <activity
+            android:name=".fullpic"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_fullpic"
+            android:theme="@style/FullscreenTheme"></activity>
     </application>
 
 </manifest>

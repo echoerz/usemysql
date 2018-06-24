@@ -1,15 +1,19 @@
 package com.example.zf.usemysql.my_updata;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.zf.usemysql.R;
+import com.example.zf.usemysql.fullpic;
+import com.example.zf.usemysql.my_love.Single_love;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -73,7 +77,14 @@ public class Single_updata extends AppCompatActivity {
                 }
             }
         }).start();
-
+        picture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Single_updata.this,fullpic.class);
+                intent.putExtra("id",id);
+                startActivity(intent);
+            }
+        });
     }
 
 
