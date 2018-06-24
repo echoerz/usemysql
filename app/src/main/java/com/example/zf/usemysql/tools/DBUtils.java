@@ -294,39 +294,6 @@ public class DBUtils {
         return null;
     }
 
-    public static HashMap<String, String> AddZan(String username) {
-        HashMap<String, String> map = new HashMap<>();
-        Connection conn = getConnection("test");
-        try {
-            Statement st = conn.createStatement();
-            String sql = "update fragment set zan=zan+1 where username = '" + username + "'";
-            st.executeUpdate(sql);
-            conn.close();
-            st.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.d(TAG, " 数据操作异常");
-            return null;
-        }
-        return null;
-    }
-
-    public static HashMap<String, String> CutZan(String username) {
-        HashMap<String, String> map = new HashMap<>();
-        Connection conn = getConnection("test");
-        try {
-            Statement st = conn.createStatement();
-            String sql = "update fragment set zan=zan-1 where username = '" + username + "'";
-            st.executeUpdate(sql);
-            conn.close();
-            st.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.d(TAG, " 数据操作异常");
-            return null;
-        }
-        return null;
-    }
 
 
     public static int changemessage(String username,String sex,String age, String location){

@@ -211,6 +211,15 @@ public class MainActivity extends BaseActivity {
                     Toast.makeText(MainActivity.this,"已收藏，请勿重复收藏",Toast.LENGTH_SHORT).show();
                 }
                 break;
+            case R.id.dianzan:
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+
+
+                    }
+                }).start();
+                break;
             default:break;
         }
         return true;
