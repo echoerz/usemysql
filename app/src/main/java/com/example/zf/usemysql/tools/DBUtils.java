@@ -294,38 +294,38 @@ public class DBUtils {
         return null;
     }
 
-    public static HashMap<String, String> AddZan(String username) {
-        HashMap<String, String> map = new HashMap<>();
+    public static int AddZan(String id) {
         Connection conn = getConnection("test");
         try {
             Statement st = conn.createStatement();
-            String sql = "update fragment set zan=zan+1 where username = '" + username + "'";
+            String sql = "UPDATE framgment SET zan=zan+1 where id = "+id;
+            //update fragment set zan=5 where id = 7
             st.executeUpdate(sql);
             conn.close();
             st.close();
         } catch (Exception e) {
             e.printStackTrace();
             Log.d(TAG, " 数据操作异常");
-            return null;
+            return 0;
         }
-        return null;
+        return 0;
     }
 
-    public static HashMap<String, String> CutZan(String username) {
-        HashMap<String, String> map = new HashMap<>();
+    public static int CutZan(String id) {
         Connection conn = getConnection("test");
         try {
             Statement st = conn.createStatement();
-            String sql = "update fragment set zan=zan-1 where username = '" + username + "'";
+            String sql = "UPDATE framgment SET zan=zan-1 where id = "+id;
+            //update fragment set zan=5 where id = 7
             st.executeUpdate(sql);
             conn.close();
             st.close();
         } catch (Exception e) {
             e.printStackTrace();
             Log.d(TAG, " 数据操作异常");
-            return null;
+            return 0;
         }
-        return null;
+        return 0;
     }
 
 

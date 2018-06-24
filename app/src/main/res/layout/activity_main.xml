@@ -36,6 +36,7 @@
                 android:orientation="vertical"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
+                android:layout_marginBottom="80dp"
                 android:layout_centerInParent="true">
 
                 <de.hdodenhof.circleimageview.CircleImageView
@@ -90,6 +91,15 @@
                     android:text="欢迎回来"
                     android:id="@+id/main_context"/>
 
+                <com.jaren.lib.view.LikeView
+                    android:id="@+id/lv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/main_picture"
+                    android:layout_toLeftOf="@+id/main_zan"
+                    app:cirRadius="10dp"
+                    app:cycleTime="2000"
+                    app:defaultColor="#ff657487" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

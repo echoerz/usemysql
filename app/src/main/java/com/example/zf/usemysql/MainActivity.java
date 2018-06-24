@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Base64;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -24,11 +25,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zf.usemysql.login.BaseActivity;
+import com.example.zf.usemysql.my_love.Love_item;
 import com.example.zf.usemysql.my_love.mylove;
 import com.example.zf.usemysql.myroom.MainZhuYe;
 import com.example.zf.usemysql.my_updata.myupdata;
 import com.example.zf.usemysql.tools.DBUtils;
 import com.example.zf.usemysql.tools.love;
+import com.jaren.lib.view.LikeView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -49,8 +52,10 @@ public class MainActivity extends BaseActivity {
     private static final String TAG = "MainActivity";
     private static String user;
     private static int userid;
+    private static int userzan;
     private static int check_love;
     private static int checknew_love;
+    private int zan_biaozhi=0;
     Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message message) {
@@ -59,8 +64,9 @@ public class MainActivity extends BaseActivity {
             ((TextView) findViewById(R.id.main_username)).setText(textfen[0]);
             ((TextView) findViewById(R.id.main_title)).setText(textfen[1]);
             ((TextView) findViewById(R.id.main_context)).setText(textfen[2]);
-            ((TextView) findViewById(R.id.main_zan)).setText("点赞数："+textfen[4]);
+            ((TextView) findViewById(R.id.main_zan)).setText(textfen[4]);
             userid= Integer.parseInt(textfen[3]);
+            userzan= Integer.parseInt(textfen[4]);
             if(textfen[5].equals("2")) {
                 Bitmap bitmap = convertStringToIcon(textfen[6]);
                 ((ImageView) findViewById(R.id.main_picture)).setImageBitmap(bitmap);
@@ -91,12 +97,67 @@ public class MainActivity extends BaseActivity {
         use_touxiang = (ImageView)headerView.findViewById(R.id.use_touxiang);  //获取用户头像
 
 
+        final LikeView lv = (LikeView) findViewById(R.id.lv);
+        lv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (zan_biaozhi==0) {
+                    ((TextView) findViewById(R.id.main_zan)).setText(String.valueOf(userzan + 1));
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            DBUtils.AddZan(String.valueOf(userid));
+                        }
+                    }).start();
+                    zan_biaozhi=1;
+                }
+                else{
+                    ((TextView) findViewById(R.id.main_zan)).setText(String.valueOf(userzan));
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            DBUtils.CutZan(String.valueOf(userid));
+                        }
+                    }).start();
+                    zan_biaozhi=0;
+                }
+            }
+        });
+
         pic_show = (ImageView)findViewById(R.id.show_pic);
         pref1 = PreferenceManager.getDefaultSharedPreferences(this);
         user= pref1.getString("user","");
         touxiang_name.setText(user);
         Toast.makeText(this,"欢迎回来，"+user,Toast.LENGTH_SHORT).show();
 
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String data = DBUtils.ChackID();
+                //Message message = Message.obtain();
+                Message msg = new Message();
+                try {
+                    String idnow = String.valueOf(DBUtils.nowid);
+                    URL url = new URL("http://123.207.151.226:8080/pic/"+idnow+".jpg");
+                    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                    //这里就简单的设置了网络的读取和连接时间上线，如果时间到了还没成功，那就不再尝试
+                    httpURLConnection.setReadTimeout(8000);
+                    httpURLConnection.setConnectTimeout(8000);
+                    InputStream inputStream = httpURLConnection.getInputStream();
+                    //这里直接就用bitmap取出了这个流里面的图片，哈哈，其实整篇文章不就主要是这一句嘛
+                    Bitmap bm = BitmapFactory.decodeStream(inputStream);
+                    //下面这是把图片携带在Message里面，简单，不多说
+                    data = data+convertIconToString(bm) + "aaaa\n";
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                msg.what = 1;
+                msg.obj=data;
+                handler.sendMessage(msg);
+            }
+        }).start();
+        
         (findViewById(R.id.btn_01)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -127,6 +188,7 @@ public class MainActivity extends BaseActivity {
                         handler.sendMessage(msg);
                     }
                 }).start();
+                lv.setChecked(false);
             }
             // }
         });
