@@ -12,9 +12,5 @@
         android:icon="@mipmap/love"
         android:title="加入收藏"
         app:showAsAction="never"/>
-    <item
-        android:id="@+id/dianzan"
-        android:icon="@mipmap/dianzan"
-        android:title="点赞"
-        app:showAsAction="ifRoom"/>
+
 </menu>
