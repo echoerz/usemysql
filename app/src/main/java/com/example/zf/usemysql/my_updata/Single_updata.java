@@ -80,6 +80,8 @@ public class Single_updata extends AppCompatActivity {
         picture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(check == 0)
+                    return;
                 Intent intent = new Intent(Single_updata.this,fullpic.class);
                 intent.putExtra("id","updata");
                 startActivity(intent);

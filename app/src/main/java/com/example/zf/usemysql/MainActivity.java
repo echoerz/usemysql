@@ -58,13 +58,14 @@ public class MainActivity extends BaseActivity {
     private static int checknew_love;
     private int zan_biaozhi=0;
     public static String bitmapString=null;
+    private String textfen[];
     private ProgressBar progressBar;
 
     Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message message) {
             String text = (String) message.obj;
-            String textfen[] = text.split("aaaa\n");
+            textfen = text.split("aaaa\n");
             ((TextView) findViewById(R.id.main_username)).setText(textfen[0]);
             ((TextView) findViewById(R.id.main_title)).setText(textfen[1]);
             ((TextView) findViewById(R.id.main_context)).setText(textfen[2]);
@@ -167,6 +168,8 @@ public class MainActivity extends BaseActivity {
         (findViewById(R.id.main_picture)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(textfen[5].equals("0"))
+                    return;
                 Intent intent = new Intent(MainActivity.this,fullpic.class);
                 intent.putExtra("id","main");
                 startActivity(intent);
