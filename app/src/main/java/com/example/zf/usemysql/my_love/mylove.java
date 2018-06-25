@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
@@ -105,6 +107,12 @@ public class mylove extends AppCompatActivity {
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
+                            data.bitmap = bm;
+                        }
+                        else {
+                            Drawable drawable = getResources().getDrawable(R.mipmap.logo2);
+                            BitmapDrawable bd = (BitmapDrawable) drawable;
+                            bm = bd.getBitmap();
                             data.bitmap = bm;
                         }
                         loves[i] = data;
